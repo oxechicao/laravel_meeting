@@ -1,77 +1,111 @@
-@extends('layouts.app')
+<!doctype html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<head>
+    <meta charset="utf-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1"
+    >
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+    <!-- CSRF Token -->
+    <meta
+        name="csrf-token"
+        content="{{ csrf_token() }}"
+    >
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
-                        @csrf
+    <title>{{ config('app.name', 'Laravel') }}</title>
 
-                        <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+    <!-- Scripts -->
+    <script
+        src="{{ asset('js/app.js') }}"
+        defer
+    ></script>
 
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+    <!-- Fonts -->
+    <link
+        rel="dns-prefetch"
+        href="//fonts.gstatic.com"
+    >
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito"
+        rel="stylesheet"
+    >
 
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+    <!-- Styles -->
+    <link
+        href="{{ asset('css/app.css') }}"
+        rel="stylesheet"
+    >
+    <link
+        href="{{ asset('css/tailwind.css') }}"
+        rel="stylesheet"
+    >
+</head>
+<body>
+<div id="app">
+    <div class="flex w-full h-screen justify-center content-center bg-gray-100">
+        <div class="flex flex-col  w-full md:w-1/2 justify-center">
+            <div class="h-auto ml-0 md:ml-16 md:mr-16 px-8 pt-6 pb-8 mb-4  rounded-lg  shadow-2xl">
+                <p class="text-5xl text-orange-600 font-bold">
+                    Meeting Scheduler
+                </p>
+                <p class="text-3xl text-gray-500 font-bold">
+                    As nossas boas vindas
+                </p>
+                <form
+                    action=""
+                    class="mt-10 px-5"
+                >
+                    <div class="mb-10">
+                        <label
+                            for="email"
+                            class="block text-gray-700"
+                        >
+                            E-mail
+                        </label>
+                        <input
+                            class="mt-3 shadow appearance-none border rounded w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:shadow-outline"
+                            id="email"
+                            type="email"
+                            placeholder="email@provedor.com"
+                        >
+                    </div>
+                    <div class="mb-10">
+                        <label
+                            for="password"
+                            class="block text-gray-700"
+                        >
+                            Senha
+                        </label>
+                        <input
+                            class="mt-3 shadow appearance-none border rounded w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:shadow-outline"
+                            id="password"
+                            type="password"
+                        >
+                    </div>
+                    <div class="flex mb-5 justify-between">
+                        <a
+                            class="inline-block align-baseline self-center text-right font-bold text-sm text-orange-500 hover:text-orange-700"
+                            href="#"
+                        >
+                            Primeira vez? Cadastre-se!
+                        </a>
+                        <button
+                            class="bg-orange-600 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded focus:outline-none"
+                            type="button"
+                        >
+                            Entrar
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
+        <div
+            class="flex flex-col justify-center w-0 md:w-2/3 home-image-form shadow-2xl"
+        ></div>
+
     </div>
 </div>
-@endsection
+</div>
+</body>
+</html>
