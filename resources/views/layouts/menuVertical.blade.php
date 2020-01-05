@@ -5,11 +5,12 @@
                 MS
             </p>
         </a>
-        <a href="{{route('logout')}}">
-            <p class="text-center text-gray-600 font-bold hover:text-gray-400 hover:shadow-2xl mx-5">
+        <form action="{{route('logout')}}" method="post" class="w-full flex justify-center">
+            @csrf
+            <button class="appearance-none text-center text-gray-600 font-bold hover:text-gray-400 hover:shadow-2xl mx-5">
                 <span class="text-lg mdi mdi-exit-run"></span> Sair
-            </p>
-        </a>
+            </button>
+        </form>
     </div>
     <div class="mt-6 my-app-menu text-gray-600 text-center font-bold">
         <div class="my-6 hover:text-gray-300">

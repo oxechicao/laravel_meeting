@@ -25,10 +25,13 @@
         </div>
 
         <div class="hover:text-gray-300 mx-5">
-            <a href="{{route('logout')}}">
+            <form action="{{route('logout')}}" method="post" class="w-full">
+                @csrf
+                <button class="appearance-none">
                 <span class="text-2xl mdi mdi-exit-run"></span>
-                <p class="text-icon-menu-h">Sair</p>
-            </a>
+                    <p class="text-icon-menu-h">Sair</p>
+                </button>
+            </form>
         </div>
     </div>
 </div>

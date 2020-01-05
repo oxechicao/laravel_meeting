@@ -10,7 +10,7 @@
         </div>
     @endif
 
-    <div class="flex flex-col w-full sm:h-auto md:mt-0">
+    <div class="flex flex-col w-full sm:h-auto mb-16 md:mt-0">
         <div class="mt-16 ml-16">
             <p class="text-4xl text-gray-700">Próximas reuniões</p>
         </div>
