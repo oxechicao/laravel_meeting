@@ -45864,10 +45864,10 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 
 Vue.component('example-component', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue")["default"]);
 Vue.component('card-meeting', __webpack_require__(/*! ./components/CardMeeting.vue */ "./resources/js/components/CardMeeting.vue")["default"]);
-Vue.component('empty-meeting', __webpack_require__(/*! ./components/CardMeeting/EmptyMeeting.vue */ "./resources/js/components/CardMeeting/EmptyMeeting.vue")["default"]);
 Vue.component('content-meeting', __webpack_require__(/*! ./components/CardMeeting/ContentMeeting.vue */ "./resources/js/components/CardMeeting/ContentMeeting.vue")["default"]);
-Vue.component('quick-actions', __webpack_require__(/*! ./components/QuickActions.vue */ "./resources/js/components/QuickActions.vue")["default"]);
+Vue.component('empty-meeting', __webpack_require__(/*! ./components/CardMeeting/EmptyMeeting.vue */ "./resources/js/components/CardMeeting/EmptyMeeting.vue")["default"]);
 Vue.component('meeting-calendar', __webpack_require__(/*! ./components/MeetingCalendar.vue */ "./resources/js/components/MeetingCalendar.vue")["default"]);
+Vue.component('quick-actions', __webpack_require__(/*! ./components/QuickActions.vue */ "./resources/js/components/QuickActions.vue")["default"]);
 Vue.component('right-sidebar', __webpack_require__(/*! ./components/RightSidebar.vue */ "./resources/js/components/RightSidebar.vue")["default"]);
 
 Vue.use(v_calendar__WEBPACK_IMPORTED_MODULE_0___default.a);

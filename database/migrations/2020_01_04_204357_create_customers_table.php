@@ -17,7 +17,6 @@ class CreateCustomersTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->char('name', 255);
             $table->json('meeting_preferencies');
             $table->timestamps();
             $table->softDeletes();

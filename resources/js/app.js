@@ -20,11 +20,13 @@ window.Vue = require('vue');
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+
 Vue.component('card-meeting', require('./components/CardMeeting.vue').default);
-Vue.component('empty-meeting', require('./components/CardMeeting/EmptyMeeting.vue').default);
 Vue.component('content-meeting', require('./components/CardMeeting/ContentMeeting.vue').default);
-Vue.component('quick-actions', require('./components/QuickActions.vue').default);
+Vue.component('empty-meeting', require('./components/CardMeeting/EmptyMeeting.vue').default);
+
 Vue.component('meeting-calendar', require('./components/MeetingCalendar.vue').default);
+Vue.component('quick-actions', require('./components/QuickActions.vue').default);
 Vue.component('right-sidebar', require('./components/RightSidebar.vue').default);
 
 import VCalendar from 'v-calendar';

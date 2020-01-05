@@ -66,7 +66,7 @@
     >
         @include('layouts.menuVertical')
     </div>
-    <div class="flex flex-col md:flex-row sm:w-full sm:h-auto md:w-auto md:h-full md:pl-32 pt-24 md:pt-0 bg-gray-200">
+    <div class="flex flex-col md:flex-row w-full h-full md:pl-32 pt-24 md:pt-0 bg-gray-200">
         @yield('content')
     </div>
 </div>

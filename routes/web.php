@@ -18,3 +18,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/user/index', 'UserController@index')->name('user.index');
+Route::put('/user/update/{id}', 'UserController@update')->name('user.update');
