@@ -20,6 +20,10 @@
         src="{{ asset('js/app.js') }}"
         defer
     ></script>
+    <script
+        src="{{ asset('js/formHome.js') }}"
+        defer
+    ></script>
 
     <!-- Fonts -->
     <link
@@ -50,10 +54,15 @@
                     Meeting Scheduler
                 </p>
                 <p class="text-3xl text-gray-500 font-bold">
-                    As nossas boas vindas
+                    Desejamos boas vindas à você.
+                </p>
+                <p class="text-gray-500 font-bold">
+                    Preencha os dados para acessar.
                 </p>
                 <form
+                    id="form-home"
                     action=""
+                    method="post"
                     class="mt-10 px-5"
                 >
                     <div class="mb-10">
@@ -68,6 +77,7 @@
                             id="email"
                             type="email"
                             placeholder="email@provedor.com"
+                            required
                         >
                     </div>
                     <div class="mb-10">
@@ -81,16 +91,21 @@
                             class="mt-3 shadow appearance-none border rounded w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:shadow-outline"
                             id="password"
                             type="password"
+                            required
                         >
                     </div>
                     <div class="flex mb-5 justify-between">
-                        <a
-                            class="inline-block align-baseline self-center text-right font-bold text-sm text-orange-500 hover:text-orange-700"
+                        <button
+                            id="form-buttom-register"
+                            type="button"
+                            class="appearance-none inline-block align-baseline self-center text-right font-bold text-sm text-orange-500 hover:text-orange-700"
                             href="#"
                         >
                             Primeira vez? Cadastre-se!
-                        </a>
+                        </button>
                         <button
+                            id="form-button-login"
+                            type="button"
                             class="bg-orange-600 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded focus:outline-none"
                             type="button"
                         >

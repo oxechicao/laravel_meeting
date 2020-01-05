@@ -13,6 +13,6 @@ SPA frontend (Angular smaple): ...
 | TABLE                         | FIELDS                                                          | 
 |-------------------------------|-----------------------------------------------------------------|
 | User                          | login - name - passwd                                           |
-| Customer                      | name - email - meeting_preferencies { week_day - time }         |
+| Customer                      | name - meeting_preferencies { week_day - time }         |
 | contacts                      | email - phones \[array\]                                        |
 | meetings                      | customer - datetime - duration                                  |

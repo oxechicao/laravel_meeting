@@ -22,5 +22,9 @@
         "vue": "^2.5.17",
         "vue-template-compiler": "^2.6.10",
         "tailwindcss": "^1.1.4"
+    },
+    "dependencies": {
+        "@mdi/font": "^4.7.95",
+        "v-calendar": "^1.0.0"
     }
 }
