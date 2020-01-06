@@ -52,21 +52,21 @@
 <body>
 <div
     id="app"
-    class="flex flex-col h-screen"
+    class="flex flex-col h-full min-h-screen"
 >
     <div
         class="visible md:invisible w-full"
-        style="position: absolute"
+        style="position: fixed"
     >
         @include('layouts.menuHorizontal')
     </div>
     <div
-        class="visible md:invisible h-full"
-        style="position: absolute"
+        class="visible md:invisible h-full min-h-screen"
+        style="position: fixed"
     >
         @include('layouts.menuVertical')
     </div>
-    <div class="flex flex-col md:flex-row w-full h-full md:pl-32 pt-24 md:pt-0 bg-gray-200">
+    <div class="flex flex-col md:flex-row w-full min-h-screen h-full md:pl-32 pt-24 md:pt-0 bg-gray-200">
         @yield('content')
     </div>
 </div>

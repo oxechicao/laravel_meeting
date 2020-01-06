@@ -6,26 +6,8 @@
       <p class="text-4xl text-gray-700">Perfil</p>
     </div>
 
-    @if ($errors->any())
-      <div
-        class="bg-red-300 border-4 border-red-500 text-red-900 px-10 my-5 py-1 rounded-lg mx-16 flex items-center"
-        role="alert"
-      >
-        <span class="mdi mdi-close-octagon-outline mr-10 text-xl"></span>
-        @foreach ($errors->all() as $error)
-          <span class="mr-3">{{ $error }}</span>
-        @endforeach
-      </div>
-    @endif
-
-    @if (session('status'))
-      <div
-        class="bg-green-300 border-4 border-green-500 text-green-900 px-10 my-5 py-1 rounded-lg mx-16 flex items-center"
-        role="alert"
-      >
-        <span class="mdi mdi-thumb-up-outline mr-10 text-xl"></span> {{ session('status') }}
-      </div>
-    @endif
+    @include('layouts.components.errors')
+    @include('layouts.components.status')
 
     @if(data_get($user, 'name', '') === 'MS Guest')
       <div class="bg-blue-300 border-4 border-blue-500 text-blue-900 px-10 py-1 my-5 rounded-lg mx-16 flex items-center">

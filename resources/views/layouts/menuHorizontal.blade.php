@@ -8,20 +8,28 @@
     </div>
     <div class="flex flex-wrap justify-around items-center w-full my-app-menu text-gray-600 text-center font-bold">
         <div class="hover:text-gray-300 mx-5">
+          <a href="{{route('home')}}">
             <span class="text-2xl mdi mdi-home-outline"></span>
             <p class="text-icon-menu-h">Home</p>
+          </a>
         </div>
         <div class="hover:text-gray-300 mx-5">
+          <a href="{{route('contact.index')}}">
             <span class="text-2xl mdi mdi-account-group-outline"></span>
             <p class="text-icon-menu-h">Contatos</p>
+          </a>
         </div>
         <div class="hover:text-gray-300 mx-5">
+          <a href="{{route('agenda.index')}}">
             <span class="text-2xl mdi mdi-calendar-outline"></span>
             <p class="text-icon-menu-h">Agenda</p>
+          </a>
         </div>
         <div class="hover:text-gray-300 mx-5">
+          <a href="{{route('user.index')}}">
             <span class="text-2xl mdi mdi-settings-outline"></span>
             <p class="text-icon-menu-h">Perfil</p>
+          </a>
         </div>
 
         <div class="hover:text-gray-300 mx-5">

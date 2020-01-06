@@ -17,7 +17,20 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::middleware(['web', 'auth'])->group(function () {
+    Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/user/index', 'UserController@index')->name('user.index');
-Route::put('/user/update/{id}', 'UserController@update')->name('user.update');
+    Route::get('/user/profile', 'UserController@index')->name('user.index');
+    Route::put('/user/update/{id}', 'UserController@update')->name('user.update');
+
+    Route::get('/contacts', 'ContactController@index')->name('contact.index');
+    Route::post('/contacts/store', 'ContactController@store')->name('contact.store');
+    Route::put('/contacts/update/{id?}', 'ContactController@update')->name('contact.update');
+    Route::delete('/contacts/destroy/{id?}', 'ContactController@destroy')->name('contact.destroy');
+
+    Route::get('/agendas', 'AgendaController@index')->name('agenda.index');
+    Route::post('/agendas/store', 'AgendaController@store')->name('agenda.store');
+    Route::put('/agendas/update/{id?}', 'AgendaController@update')->name('agenda.update');
+});
+
+

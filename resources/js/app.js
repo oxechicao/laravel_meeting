@@ -29,9 +29,17 @@ Vue.component('meeting-calendar', require('./components/MeetingCalendar.vue').de
 Vue.component('quick-actions', require('./components/QuickActions.vue').default);
 Vue.component('right-sidebar', require('./components/RightSidebar.vue').default);
 
+Vue.component('contact-index', require('./components/Contact/ContactIndex').default);
+Vue.component('contact-card', require('./components/Contact/ContactCard').default);
+Vue.component('contact-form', require('./components/Contact/ContactForm').default);
+
 import VCalendar from 'v-calendar';
 
 Vue.use(VCalendar);
+
+import VueTheMask from 'vue-the-mask'
+
+Vue.use(VueTheMask)
 
 
 /**
@@ -41,5 +49,5 @@ Vue.use(VCalendar);
  */
 
 const app = new Vue({
-    el: '#app',
+  el: '#app',
 });
