@@ -2181,7 +2181,19 @@ __webpack_require__.r(__webpack_exports__);
         console.log(err);
       });
     },
-    postForm: function postForm() {},
+    postForm: function postForm() {
+      var _this2 = this;
+
+      window.axios.post(this.action, this.localContact).then(function (res) {
+        console.log(res);
+        _this2.showAlert = true;
+        setTimeout(function () {
+          _this2.showAlert = false;
+        }, 5000);
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    },
     deleteForm: function deleteForm() {
       if (!this.contact.hasOwnProperty('id')) return;
       window.axios["delete"](this.actions[2] + '/' + this.contact.id);
@@ -2238,49 +2250,27 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       contacts: [{
-        id: 1,
-        name: 'John Snow',
-        email: 'john.snow@sabedenada.got',
-        phones: ['8598877665544']
-      }, {
-        id: 1,
-        name: 'John Snow',
-        email: 'john.snow@sabedenada.got',
-        phones: ['8598877665544']
-      }, {
-        id: 1,
-        name: 'John Snow',
-        email: 'john.snow@sabedenada.got',
-        phones: ['8598877665544']
-      }, {
-        id: 1,
-        name: 'John Snow',
-        email: 'john.snow@sabedenada.got',
-        phones: ['8598877665544']
-      }, {
-        id: 1,
-        name: 'John Snow',
-        email: 'john.snow@sabedenada.got',
-        phones: ['8598877665544']
-      }, {
-        id: 1,
-        name: 'John Snow',
-        email: 'john.snow@sabedenada.got',
-        phones: ['8598877665544']
-      }, {
-        id: 1,
-        name: 'John Snow',
-        email: 'john.snow@sabedenada.got',
-        phones: ['8598877665544']
+        name: '',
+        email: '',
+        phones: ['']
       }]
     };
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    window.axios.get('/contacts/all').then(function (res) {
+      if (res.data.length > 0) {
+        _this.contacts = _this.contacts.concat(res.data);
+      }
+    });
   },
   methods: {
     addNew: function addNew() {
       this.contacts = [{
         name: '',
         email: '',
-        phones: []
+        phones: ['']
       }].concat(this.contacts);
     }
   }

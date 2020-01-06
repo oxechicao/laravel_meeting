@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Contact;
 use App\Repositories\ContactRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ContactController extends Controller
 {
@@ -16,12 +17,7 @@ class ContactController extends Controller
      */
     public function index(ContactRepository $contactRepository)
     {
-        return view(
-            'contact.index',
-            [
-                'contacts' => $contactRepository->getContactsByUserId(\Auth::user()->id)
-            ]
-        );
+        return view('contact.index');
     }
 
     /**
@@ -31,18 +27,18 @@ class ContactController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function store(Request $request)
+    public function store(Request $request, ContactRepository $contactRepository)
     {
-        //
+        $this->validator($request->all())->validate();
+        return response()->json($contactRepository->insert($request->all()));
     }
 
     /**
@@ -76,7 +72,7 @@ class ContactController extends Controller
      */
     public function update(Request $request, Contact $contact)
     {
-        dd(1);
+        dd($contact);
     }
 
     /**
@@ -88,5 +84,24 @@ class ContactController extends Controller
     public function destroy(Contact $contact)
     {
         //
+    }
+
+    public function getAll(ContactRepository $contactRepository)
+    {
+        return response()->json($contactRepository->getContactsByUserId(\Auth::user()->id));
+    }
+
+    /**
+     * Get a validator for an incoming registration request.
+     *
+     * @param array $data
+     * @return \Illuminate\Contracts\Validation\Validator
+     */
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255']
+        ]);
     }
 }

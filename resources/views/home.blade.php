@@ -15,7 +15,6 @@
             <p class="text-4xl text-gray-700">Próximas reuniões</p>
         </div>
         <div class="mt-16 mx-16">
-            {{--        <span class="mdi mdi-emoticon-sad-outline"></span>--}}
             <card-meeting></card-meeting>
         </div>
     </div>

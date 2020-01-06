@@ -154,6 +154,17 @@
           })
       },
       postForm () {
+        window.axios.post(this.action, this.localContact)
+          .then(res => {
+            console.log(res)
+            this.showAlert = true
+            setTimeout(() => {
+              this.showAlert = false
+            }, 5000)
+          })
+          .catch(err => {
+            console.log(err)
+          })
       },
       deleteForm () {
         if (!this.contact.hasOwnProperty('id')) return

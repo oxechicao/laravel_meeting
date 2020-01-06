@@ -5,6 +5,7 @@ namespace App\Repositories;
 
 
 use App\Contact;
+use Illuminate\Support\Facades\DB;
 
 class ContactRepository
 {
@@ -31,5 +32,16 @@ class ContactRepository
         return Contact::where('user_id', $id)
             ->select(['id', 'name', 'email', 'phones'])
             ->get();
+    }
+
+    /**
+     * @param $data
+     * @return mixed
+     */
+    public function insert($data)
+    {
+        if (isset($data['phones']) && is_array($data['phones'])) $data['phones'] = json_encode($data['phones']);
+        $data['user_id'] = \Auth::user()->id;
+        return DB::table('contacts')->insert([$data]);
     }
 }

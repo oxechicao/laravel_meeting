@@ -34,74 +34,31 @@
         required: true
       }
     },
-    data() {
+    data () {
       return {
         contacts: [
           {
-            id: 1,
-            name: 'John Snow',
-            email: 'john.snow@sabedenada.got',
-            phones: [
-              '8598877665544'
-            ]
-          },
-          {
-            id: 1,
-            name: 'John Snow',
-            email: 'john.snow@sabedenada.got',
-            phones: [
-              '8598877665544'
-            ]
-          },
-          {
-            id: 1,
-            name: 'John Snow',
-            email: 'john.snow@sabedenada.got',
-            phones: [
-              '8598877665544'
-            ]
-          },
-          {
-            id: 1,
-            name: 'John Snow',
-            email: 'john.snow@sabedenada.got',
-            phones: [
-              '8598877665544'
-            ]
-          },
-          {
-            id: 1,
-            name: 'John Snow',
-            email: 'john.snow@sabedenada.got',
-            phones: [
-              '8598877665544'
-            ]
-          },
-          {
-            id: 1,
-            name: 'John Snow',
-            email: 'john.snow@sabedenada.got',
-            phones: [
-              '8598877665544'
-            ]
-          },
-          {
-            id: 1,
-            name: 'John Snow',
-            email: 'john.snow@sabedenada.got',
-            phones: [
-              '8598877665544'
-            ]
+            name: '',
+            email: '',
+            phones: ['']
           }
         ]
       }
     },
+    mounted () {
+      window.axios.get('/contacts/all')
+        .then(res => {
+          if (res.data.length > 0) {
+            this.contacts = this.contacts.concat(res.data)
+          }
+        })
+    },
     methods: {
-      addNew() {
+      addNew () {
         this.contacts = [{
           name: '',
           email: '',
-          phones: []
+          phones: ['']
         }].concat(this.contacts)
       }
     }

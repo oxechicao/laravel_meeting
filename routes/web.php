@@ -24,6 +24,7 @@ Route::middleware(['web', 'auth'])->group(function () {
     Route::put('/user/update/{id}', 'UserController@update')->name('user.update');
 
     Route::get('/contacts', 'ContactController@index')->name('contact.index');
+    Route::get('/contacts/all', 'ContactController@getAll')->name('contact.all');
     Route::post('/contacts/store', 'ContactController@store')->name('contact.store');
     Route::put('/contacts/update/{id?}', 'ContactController@update')->name('contact.update');
     Route::delete('/contacts/destroy/{id?}', 'ContactController@destroy')->name('contact.destroy');
