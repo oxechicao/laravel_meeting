@@ -20,6 +20,7 @@ window.Vue = require('vue');
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('vue-modal', require('./components/VueModal.vue').default);
 
 Vue.component('card-meeting', require('./components/CardMeeting.vue').default);
 Vue.component('content-meeting', require('./components/CardMeeting/ContentMeeting.vue').default);
@@ -32,6 +33,7 @@ Vue.component('right-sidebar', require('./components/RightSidebar.vue').default)
 Vue.component('contact-index', require('./components/Contact/ContactIndex').default);
 Vue.component('contact-card', require('./components/Contact/ContactCard').default);
 Vue.component('contact-form', require('./components/Contact/ContactForm').default);
+Vue.component('contact-remove-confirm', require('./components/Contact/ContactRemoveConfirm').default);
 
 import VCalendar from 'v-calendar';
 

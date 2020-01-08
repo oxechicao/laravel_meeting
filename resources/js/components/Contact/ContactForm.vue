@@ -81,7 +81,7 @@
     </div>
     <div class="flex justify-between">
       <button
-        @click="deleteForm"
+        @click="handleDelete"
         class="text-orange-700 hover:text-orange-500 hover:shadown"
       >
         <span v-if="this.contact.hasOwnProperty('id')">
@@ -96,6 +96,12 @@
         Salvar
       </button>
     </div>
+    <contact-remove-confirm
+      v-if="showModal"
+      :contact="contact"
+      @delete="deleteForm"
+      @close="showModal = false"
+    />
   </div>
 </template>
 
@@ -114,7 +120,8 @@
       return {
         countPhones: 1,
         localContact: {phones: []},
-        showAlert: false
+        showAlert: false,
+        showModal: false
       }
     },
     watch: {
@@ -148,6 +155,7 @@
             setTimeout(() => {
               this.showAlert = false
             }, 5000)
+            this.$emit('findContacts')
           })
           .catch(err => {
             console.log(err)
@@ -161,14 +169,19 @@
             setTimeout(() => {
               this.showAlert = false
             }, 5000)
+            this.$emit('findContacts')
           })
           .catch(err => {
             console.log(err)
           })
       },
+      handleDelete () {
+        this.showModal = true
+      },
       deleteForm () {
         if (!this.contact.hasOwnProperty('id')) return
         window.axios.delete(this.actions[2] + '/' + this.contact.id)
+          .then(() => this.$emit('findContacts'))
       }
     }
   }

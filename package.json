@@ -25,6 +25,7 @@
     },
     "dependencies": {
         "@mdi/font": "^4.7.95",
+        "animate.css": "^3.7.2",
         "v-calendar": "^1.0.0",
         "vue-the-mask": "^0.11.1"
     }

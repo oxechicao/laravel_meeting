@@ -5,6 +5,7 @@ namespace App\Repositories;
 
 
 use App\Contact;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class ContactRepository
@@ -42,6 +43,13 @@ class ContactRepository
     {
         if (isset($data['phones']) && is_array($data['phones'])) $data['phones'] = json_encode($data['phones']);
         $data['user_id'] = \Auth::user()->id;
+        $data['created_at'] = Carbon::now('America/Fortaleza');
+        $data['updated_at'] = Carbon::now('America/Fortaleza');
         return DB::table('contacts')->insert([$data]);
+    }
+
+    public function update($data)
+    {
+        return Contact::where('id', $data['id'])->update($data);
     }
 }

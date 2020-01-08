@@ -27,7 +27,7 @@ Route::middleware(['web', 'auth'])->group(function () {
     Route::get('/contacts/all', 'ContactController@getAll')->name('contact.all');
     Route::post('/contacts/store', 'ContactController@store')->name('contact.store');
     Route::put('/contacts/update/{id?}', 'ContactController@update')->name('contact.update');
-    Route::delete('/contacts/destroy/{id?}', 'ContactController@destroy')->name('contact.destroy');
+    Route::delete('/contacts/destroy/{contact?}', 'ContactController@destroy')->name('contact.destroy');
 
     Route::get('/agendas', 'AgendaController@index')->name('agenda.index');
     Route::post('/agendas/store', 'AgendaController@store')->name('agenda.store');

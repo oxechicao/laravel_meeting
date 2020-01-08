@@ -47,19 +47,9 @@
 </head>
 <body>
 <div id="app">
-  @if ($errors->any())
-    <div
-      class="bg-red-300 border-4 border-red-500 text-red-900 px-10 my-5 py-1 rounded-lg mx-16 flex items-center"
-      role="alert"
-    >
-      <span class="mdi mdi-close-octagon-outline mr-10 text-xl"></span>
-      @foreach ($errors->all() as $error)
-        <span class="mr-3">{{ $error }}</span>
-      @endforeach
-    </div>
-  @endif
   <div class="flex w-full h-screen justify-center content-center bg-gray-200">
     <div class="flex flex-col  w-full md:w-1/2 justify-center shadow-inner">
+      @include('layouts.components.errors')
       <div class="h-auto ml-0 md:ml-16 md:mr-16 px-8 pt-6 pb-8 mb-4  rounded-lg  bg-gray-100 shadow-2xl">
         <p class="text-5xl text-orange-600 font-bold">
           Meeting Scheduler

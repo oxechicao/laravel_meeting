@@ -68,22 +68,24 @@ class ContactController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      * @param \App\Contact $contact
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, Contact $contact)
+    public function update(Request $request, Contact $contact, ContactRepository $contactRepository)
     {
-        dd($contact);
+        $this->validator($request->all())->validate();
+        return response()->json($contactRepository->update($request->all()));
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param \App\Contact $contact
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
      */
     public function destroy(Contact $contact)
     {
-        //
+        return response()->json($contact->delete());
     }
 
     public function getAll(ContactRepository $contactRepository)

@@ -16,6 +16,7 @@
         class="my-5 w-full lg:w-1/2 xl:w-1/3"
       >
         <contact-card
+          @findContacts="findContacts"
           class=""
           :contact="contact"
           :actions="actions"
@@ -46,14 +47,24 @@
       }
     },
     mounted () {
-      window.axios.get('/contacts/all')
-        .then(res => {
-          if (res.data.length > 0) {
-            this.contacts = this.contacts.concat(res.data)
-          }
-        })
+      this.findContacts()
     },
     methods: {
+      findContacts () {
+        window.axios.get('/contacts/all')
+          .then(res => {
+            this.contacts = [
+              {
+                name: '',
+                email: '',
+                phones: ['']
+              }
+            ]
+            if (res.data.length > 0) {
+              this.contacts = this.contacts.concat(res.data)
+            }
+          })
+      },
       addNew () {
         this.contacts = [{
           name: '',

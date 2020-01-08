@@ -3,6 +3,7 @@
 
     <div class="w-full p-10 bg-gray-100 rounded-lg shadow-lg">
       <contact-form
+        @findContacts="$emit('findContacts')"
         :contact="contact"
         :actions="actions"
       />

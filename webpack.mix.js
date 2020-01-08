@@ -19,3 +19,5 @@ mix.js('resources/js/formHome.js', 'public/js')
 mix.postCss('resources/css/tailwind.css', 'public/css', [
     require('tailwindcss'),
 ])
+
+mix.postCss('resources/css/animate.css', 'public/css')
