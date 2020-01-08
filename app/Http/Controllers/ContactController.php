@@ -21,15 +21,6 @@ class ContactController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param \Illuminate\Http\Request $request
@@ -39,28 +30,6 @@ class ContactController extends Controller
     {
         $this->validator($request->all())->validate();
         return response()->json($contactRepository->insert($request->all()));
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param \App\Contact $contact
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Contact $contact)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param \App\Contact $contact
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Contact $contact)
-    {
-        //
     }
 
     /**
