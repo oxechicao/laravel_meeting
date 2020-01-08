@@ -2352,20 +2352,32 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "ContactRemoveConfirm",
+  name: 'ContactRemoveConfirm',
   props: {
     contact: {
       required: true
+    },
+    showModal: {
+      "default": false
     }
   },
   methods: {
-    close: function close() {
-      this.$refs['vue-modal-component'].close();
-    },
     confirm: function confirm() {
       this.$emit('delete');
-      this.$refs['vue-modal-component'].close();
+      this.$emit('close');
     }
   }
 });
@@ -2682,23 +2694,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "VueModal",
+  name: 'VueModal',
+  props: ['showModal'],
   computed: {
     modalId: function modalId() {
       return 'modal-' + (Math.random() * 10000 + Math.random() * 1000) * Math.random();
-    }
-  },
-  methods: {
-    close: function close() {
-      var _this = this;
-
-      var modal = document.getElementById(this.modalId);
-      modal.classList.remove('fadeIn');
-      modal.classList.add('fadeOut');
-      setTimeout(function () {
-        _this.$emit('close');
-      }, 500);
     }
   }
 });
@@ -2717,7 +2728,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".modal-mask[data-v-0c579eb2] {\n  position: fixed;\n  z-index: 9998;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background-color: rgba(0, 0, 0, .5);\n  display: table;\n  -webkit-transition: opacity .3s ease;\n  transition: opacity .3s ease;\n}\n.modal-wrapper[data-v-0c579eb2] {\n  display: table-cell;\n  vertical-align: middle;\n}\n.modal-container[data-v-0c579eb2] {\n  margin: 0px auto;\n  background-color: #fff;\n  border-radius: 2px;\n  box-shadow: 0 2px 8px rgba(0, 0, 0, .33);\n  -webkit-transition: all .3s ease;\n  transition: all .3s ease;\n  font-family: Helvetica, Arial, sans-serif;\n}\n.modal-header h3[data-v-0c579eb2] {\n  margin-top: 0;\n  color: #42b983;\n}\n.modal-body[data-v-0c579eb2] {\n  margin: 20px 0;\n}\n.modal-default-button[data-v-0c579eb2] {\n  float: right;\n}\n\n/*\n * The following styles are auto-applied to elements with\n * transition=\"modal\" when their visibility is toggled\n * by Vue.js.\n *\n * You can easily play with the modal transition by editing\n * these styles.\n */\n.modal-enter[data-v-0c579eb2] {\n  opacity: 0;\n}\n.modal-leave-active[data-v-0c579eb2] {\n  opacity: 0;\n}\n.modal-enter .modal-container[data-v-0c579eb2],\n.modal-leave-active .modal-container[data-v-0c579eb2] {\n  -webkit-transform: scale(1.1);\n  transform: scale(1.1);\n}\n\n", ""]);
+exports.push([module.i, ".modal-mask[data-v-0c579eb2] {\n  position: fixed;\n  z-index: 9998;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background-color: rgba(0, 0, 0, .5);\n  display: table;\n  -webkit-transition: opacity .3s ease;\n  transition: opacity .3s ease;\n}\n.modal-wrapper[data-v-0c579eb2] {\n  display: table-cell;\n  vertical-align: middle;\n}\n.modal-container[data-v-0c579eb2] {\n  margin: 0px auto;\n  background-color: #fff;\n  border-radius: 2px;\n  box-shadow: 0 2px 8px rgba(0, 0, 0, .33);\n  -webkit-transition: all .3s ease;\n  transition: all .3s ease;\n  font-family: Helvetica, Arial, sans-serif;\n}\n.modal-header h3[data-v-0c579eb2] {\n  margin-top: 0;\n  color: #42b983;\n}\n.modal-body[data-v-0c579eb2] {\n  margin: 20px 0;\n}\n", ""]);
 
 // exports
 
@@ -34745,17 +34756,15 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
-      _vm.showModal
-        ? _c("contact-remove-confirm", {
-            attrs: { contact: _vm.contact },
-            on: {
-              delete: _vm.deleteForm,
-              close: function($event) {
-                _vm.showModal = false
-              }
-            }
-          })
-        : _vm._e()
+      _c("contact-remove-confirm", {
+        attrs: { contact: _vm.contact, showModal: _vm.showModal },
+        on: {
+          delete: _vm.deleteForm,
+          close: function($event) {
+            _vm.showModal = false
+          }
+        }
+      })
     ],
     1
   )
@@ -34855,6 +34864,7 @@ var render = function() {
     "vue-modal",
     {
       ref: "vue-modal-component",
+      attrs: { showModal: _vm.showModal },
       on: {
         close: function($event) {
           return _vm.$emit("close")
@@ -34885,7 +34895,7 @@ var render = function() {
                 "px-3 py-1 text-orange-700 hover:text-orange-600 hover:shadown-lg",
               on: { click: _vm.confirm }
             },
-            [_vm._v("Remover")]
+            [_vm._v("Remover\n      ")]
           ),
           _vm._v(" "),
           _c(
@@ -34893,9 +34903,13 @@ var render = function() {
             {
               staticClass:
                 "px-3 py-1 rounded-lg bg-orange-700 text-white hover:bg-orange-600 hover:shadow-lg",
-              on: { click: _vm.close }
+              on: {
+                click: function($event) {
+                  return _vm.$emit("close")
+                }
+              }
             },
-            [_vm._v("Cancelar")]
+            [_vm._v("Cancelar\n      ")]
           )
         ])
       ])
@@ -35243,55 +35257,73 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "div",
-    { staticClass: "animated fadeIn faster", attrs: { id: _vm.modalId } },
+    "transition",
+    {
+      attrs: {
+        name: "vue-modal-fade-transition",
+        "enter-active-class": "animated fadeIn faster",
+        "leave-active-class": "animated fadeOut faster"
+      }
+    },
     [
-      _c("div", { staticClass: "modal-mask" }, [
-        _c("div", { staticClass: "modal-wrapper px-5 md:px-0" }, [
-          _c(
-            "div",
-            { staticClass: "modal-container w-full md:w-1/2 lg:w-1/3 " },
-            [
+      _vm.showModal
+        ? _c("div", { staticClass: "modal-mask" }, [
+            _c("div", { staticClass: "modal-wrapper px-5 md:px-0" }, [
               _c(
                 "div",
-                { staticClass: "modal-header bg-orange-500 py-3 px-5 text-xl" },
+                { staticClass: "modal-container w-full md:w-1/2 lg:w-1/3 " },
                 [
-                  _c("div", { staticClass: "flex justify-between" }, [
-                    _c("div", [_vm._t("header")], 2),
-                    _vm._v(" "),
-                    _c("div", [
-                      _c(
-                        "button",
-                        { attrs: { type: "button" }, on: { click: _vm.close } },
-                        [
-                          _c("span", {
-                            staticClass:
-                              "mdi mdi-close hover:text-orange-800 hover:shadown"
-                          })
-                        ]
-                      )
-                    ])
-                  ])
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "modal-header bg-orange-500 py-3 px-5 text-xl"
+                    },
+                    [
+                      _c("div", { staticClass: "flex justify-between" }, [
+                        _c("div", [_vm._t("header")], 2),
+                        _vm._v(" "),
+                        _c("div", [
+                          _c(
+                            "button",
+                            {
+                              attrs: { type: "button" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.$emit("close")
+                                }
+                              }
+                            },
+                            [
+                              _c("span", {
+                                staticClass:
+                                  "mdi mdi-close hover:text-orange-800 hover:shadown"
+                              })
+                            ]
+                          )
+                        ])
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "modal-body px-5 py-3" },
+                    [_vm._t("body")],
+                    2
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "modal-footer px-5 py-3" },
+                    [_vm._t("footer")],
+                    2
+                  )
                 ]
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "modal-body px-5 py-3" },
-                [_vm._t("body")],
-                2
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "modal-footer px-5 py-3" },
-                [_vm._t("footer")],
-                2
               )
-            ]
-          )
-        ])
-      ])
+            ])
+          ])
+        : _vm._e()
     ]
   )
 }

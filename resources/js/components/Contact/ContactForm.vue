@@ -97,8 +97,8 @@
       </button>
     </div>
     <contact-remove-confirm
-      v-if="showModal"
       :contact="contact"
+      :showModal="showModal"
       @delete="deleteForm"
       @close="showModal = false"
     />

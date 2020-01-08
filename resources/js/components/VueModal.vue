@@ -1,55 +1,56 @@
 <template>
-  <div :id="modalId" class="animated fadeIn faster">
-    <div class="modal-mask">
-      <div class="modal-wrapper px-5 md:px-0">
-        <div class="modal-container w-full md:w-1/2 lg:w-1/3 ">
+<transition
+  name="vue-modal-fade-transition"
+  enter-active-class="animated fadeIn faster"
+  leave-active-class="animated fadeOut faster"
+>
+  <div
+    v-if="showModal"
+    class="modal-mask"
+  >
+    <div class="modal-wrapper px-5 md:px-0">
+      <div class="modal-container w-full md:w-1/2 lg:w-1/3 ">
 
-          <div class="modal-header bg-orange-500 py-3 px-5 text-xl">
-            <div class="flex justify-between">
-              <div>
-                <slot name="header">
-                </slot>
-              </div>
-              <div>
-                <button type="button" @click="close"><span class="mdi mdi-close hover:text-orange-800 hover:shadown"></span></button>
-              </div>
+        <div class="modal-header bg-orange-500 py-3 px-5 text-xl">
+          <div class="flex justify-between">
+            <div>
+              <slot name="header">
+              </slot>
+            </div>
+            <div>
+              <button
+                type="button"
+                @click="$emit('close')"
+              ><span class="mdi mdi-close hover:text-orange-800 hover:shadown"></span></button>
             </div>
           </div>
+        </div>
 
-          <div class="modal-body px-5 py-3">
-            <slot name="body">
-            </slot>
-          </div>
+        <div class="modal-body px-5 py-3">
+          <slot name="body">
+          </slot>
+        </div>
 
-          <div class="modal-footer px-5 py-3">
-            <slot name="footer">
-            </slot>
-          </div>
+        <div class="modal-footer px-5 py-3">
+          <slot name="footer">
+          </slot>
         </div>
       </div>
     </div>
   </div>
+</transition>
 </template>
 
 <script>
-  export default {
-    name: "VueModal",
-    computed: {
-      modalId () {
-        return 'modal-' + ((Math.random() * 10000 + Math.random() * 1000) * Math.random())
-      }
-    },
-    methods: {
-      close () {
-        const modal = document.getElementById(this.modalId)
-        modal.classList.remove('fadeIn')
-        modal.classList.add('fadeOut')
-        setTimeout(() => {
-          this.$emit('close')
-        }, 500)
-      }
+export default {
+  name: 'VueModal',
+  props: ['showModal'],
+  computed: {
+    modalId () {
+      return 'modal-' + ((Math.random() * 10000 + Math.random() * 1000) * Math.random())
     }
   }
+}
 </script>
 
 <style scoped>
@@ -87,32 +88,4 @@
   .modal-body {
     margin: 20px 0;
   }
-
-  .modal-default-button {
-    float: right;
-  }
-
-  /*
-   * The following styles are auto-applied to elements with
-   * transition="modal" when their visibility is toggled
-   * by Vue.js.
-   *
-   * You can easily play with the modal transition by editing
-   * these styles.
-   */
-
-  .modal-enter {
-    opacity: 0;
-  }
-
-  .modal-leave-active {
-    opacity: 0;
-  }
-
-  .modal-enter .modal-container,
-  .modal-leave-active .modal-container {
-    -webkit-transform: scale(1.1);
-    transform: scale(1.1);
-  }
-
 </style>
