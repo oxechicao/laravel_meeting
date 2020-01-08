@@ -48517,9 +48517,9 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/chicao/Projetos/funceme_mettings/resources/js/app.js */"./resources/js/app.js");
-__webpack_require__(/*! /home/chicao/Projetos/funceme_mettings/resources/sass/app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! /home/chicao/Projetos/funceme_mettings/resources/css/tailwind.css */"./resources/css/tailwind.css");
+__webpack_require__(/*! /home/fthiago/Projetos/free/laravel_meeting/resources/js/app.js */"./resources/js/app.js");
+__webpack_require__(/*! /home/fthiago/Projetos/free/laravel_meeting/resources/sass/app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! /home/fthiago/Projetos/free/laravel_meeting/resources/css/tailwind.css */"./resources/css/tailwind.css");
 
 
 /***/ })
