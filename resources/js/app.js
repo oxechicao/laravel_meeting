@@ -36,6 +36,7 @@ Vue.component('contact-form', require('./components/Contact/ContactForm').defaul
 Vue.component('contact-remove-confirm', require('./components/Contact/ContactRemoveConfirm').default);
 
 Vue.component('agenda-index', require('./components/Agenda/AgendaIndex').default);
+Vue.component('agenda-form', require('./components/Agenda/AgendaForm').default);
 
 
 import VCalendar from 'v-calendar';
