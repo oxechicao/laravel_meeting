@@ -42,6 +42,7 @@ Vue.component('agenda-page-help', require('./components/Agenda/AgendaPageHelp').
 Vue.component('agenda-form', require('./components/Agenda/AgendaForm').default);
 Vue.component('agenda-add-new-participant-modal', require('./components/Agenda/AgendaAddNewParticipantModal').default);
 Vue.component('agenda-card-participant-added', require('./components/Agenda/AgendaCardParticipantAdded').default);
+Vue.component('agenda-confirm-save', require('./components/Agenda/AgendaConfirmSave').default);
 
 
 import VCalendar from 'v-calendar';

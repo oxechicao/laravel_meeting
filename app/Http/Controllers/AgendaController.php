@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Agenda;
 use App\Repositories\AgendaRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class AgendaController extends Controller
 {
@@ -42,11 +43,16 @@ class AgendaController extends Controller
      * Store a newly created resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @param AgendaRepository $agendaRepository
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function store(Request $request)
+    public function store(Request $request, AgendaRepository $agendaRepository)
     {
-        //
+        $this->validator($request->all())->validate();
+        return response()->json(
+            $agendaRepository->insert($request->all())
+        );
+
     }
 
     /**
@@ -101,5 +107,22 @@ class AgendaController extends Controller
     public function getAll(AgendaRepository $agendaRepository)
     {
         return response()->json($agendaRepository->allByUser(\Auth::user()->id));
+    }
+
+    /**
+     * Get a validator for an incoming registration request.
+     *
+     * @param array $data
+     * @return \Illuminate\Contracts\Validation\Validator
+     */
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'title' => ['required', 'string', 'max:255'],
+            'description' => ['string'],
+            'date' => ['required', 'date'],
+            'hour' => ['required', 'string'],
+            'participants' => ['required', 'array']
+        ]);
     }
 }

@@ -13,7 +13,7 @@
         <div class="w-full md:w-5/6">
           <input
             :id="`title-${randomId}`"
-            v-model="title"
+            v-model="agenda.title"
             type="text"
             class="w-full text-gray-900 focus:bg-gray-100 focus:shadow-lg shadow rounded-lg px-3 py-2 hover:border hover:border-orange-500"
           />
@@ -43,7 +43,7 @@
             class="w-full px-3 py-2 text-gray-900 focus:bg-gray-100 focus:shadow-lg shadow rounded-lg hover:border hover:border-orange-500"
             type="text"
             v-mask="'##:##'"
-            v-model="hour"
+            v-model="agenda.hour"
           >
         </div>
       </div>
@@ -57,7 +57,7 @@
         <div class="w-full h-full md:w-5/6">
           <textarea
             :id="`description-${randomId}`"
-            v-model="description"
+            v-model="agenda.description"
             class="w-full h-full text-gray-900 focus:bg-gray-100 focus:shadow-lg shadow rounded-lg px-3 py-2 hover:border hover:border-orange-500"
             name="description-agenda"
             cols="30"
@@ -77,14 +77,14 @@
       </div>
       <div class="h-full max:h-full overflow-y-scroll pr-3 mb-3">
         <div
-          v-if="participants.length === 0"
+          v-if="agenda.participants.length === 0"
           class="mx-5 my-5"
         >
           Nenhum participante adicionado
         </div>
         <div
           v-else
-          v-for="(participant, index) in participants"
+          v-for="(participant, index) in agenda.participants"
           :key="index"
         >
           <agenda-card-participant-added
@@ -98,7 +98,10 @@
         </div>
       </div>
       <div class="self-end w-full">
-        <button class="px-3 py-2 w-full bg-orange-700 text-white text-lg rounded-lg hover:shadow-lg hover:bg-orange-600">
+        <button
+          @click="saveMeeting"
+          class="px-3 py-2 w-full bg-orange-700 text-white text-lg rounded-lg hover:shadow-lg hover:bg-orange-600"
+        >
           Agendar reunião
         </button>
       </div>
@@ -109,6 +112,14 @@
       :show-modal="showModal"
       :contact="contact"
     />
+
+    <agenda-confirm-save
+      @close="showConfirModal = false"
+      :actions="actions"
+      :agenda="agenda"
+      :show-modal="showConfirModal"
+    />
+
   </div>
 </template>
 
@@ -129,11 +140,15 @@
     data () {
       return {
         showModal: false,
-        contact: {phones: []},
-        title: '',
-        hour: '',
-        description: '',
-        participants: ['john.snow@sabedenada.got', 'fulano@lambari.lol']
+        showConfirModal: true,
+        agenda: {
+          title: 'Reunião dos barcos furados',
+          description: 'Reunião para decidir a existência dos tapa buraco na cidade. A qualidade do asfalto. Os paranauê da vida.',
+          date: this.dateCalendar,
+          hour: '04:20',
+          participants: ['john.snow@sabedenada.got', 'fulano@lambari.lol']
+        },
+        contact: {phones: []}
       }
     },
     computed: {
@@ -142,25 +157,29 @@
       }
     },
     methods: {
+      saveMeeting () {
+        this.showConfirModal = true
+      },
       addNewParticipant () {
         this.showModal = true
       },
       addParticipant (email) {
-        if (!this.participants.find(p => p === email)) {
-          this.participants.push(email)
+        if (!this.agenda.participants.find(p => p === email)) {
+          this.agenda.participants.push(email)
         }
         this.showModal = false
       },
       removeParticipant (email) {
-        this.participants.splice(this.participants.indexOf(email), 1)
+        this.agenda.participants.splice(this.agenda.participants.indexOf(email), 1)
       },
       verifyHours () {
-        if (this.hour.length < 5) return
+        if (this.agenda.hour.length < 5) return
 
-        let time = this.hour.split(':')
+        let time = this.agenda.hour.split(':')
         time[0] = parseInt(time[0]) % 24 < 10 ? '0' + parseInt(time[0]) % 24 : (parseInt(time[0]) % 24).toString()
         time[1] = parseInt(time[1]) % 60 < 10 ? '0' + parseInt(time[1]) % 60 : (parseInt(time[1]) % 60).toString()
-        this.hour = time.join(':')
+
+        this.agenda.hour = time.join(':')
       }
     }
   }
