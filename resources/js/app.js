@@ -38,6 +38,7 @@ Vue.component('contact-remove-confirm', require('./components/Contact/ContactRem
 Vue.component('contact-modal-form', require('./components/Contact/ContactModalForm').default);
 
 Vue.component('agenda-index', require('./components/Agenda/AgendaIndex').default);
+Vue.component('agenda-page-help', require('./components/Agenda/AgendaPageHelp').default);
 Vue.component('agenda-form', require('./components/Agenda/AgendaForm').default);
 Vue.component('agenda-add-new-participant-modal', require('./components/Agenda/AgendaAddNewParticipantModal').default);
 Vue.component('agenda-card-participant-added', require('./components/Agenda/AgendaCardParticipantAdded').default);

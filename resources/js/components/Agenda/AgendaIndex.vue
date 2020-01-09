@@ -9,7 +9,7 @@
           @dayclick="dayClicked"
         />
       </div>
-      <div class="h-64 ml-0 md:ml-10  w-1/2">
+      <div class="h-64 ml-0 md:ml-10  w-full pr-16">
         <agenda-form
           @findContacts="getAllContacts"
           :actions="actions"

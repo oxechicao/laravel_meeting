@@ -9,9 +9,9 @@
     class="modal-mask"
   >
     <div class="modal-wrapper px-5 md:px-0">
-      <div class="modal-container w-full md:w-1/2 lg:w-1/3 ">
+      <div class="modal-container w-full md:w-1/2 lg:w-1/3 rounded-lg">
 
-        <div class="modal-header bg-orange-500 py-3 px-5 text-xl">
+        <div class="modal-header text-orange-700 bg-gray-100 py-5 px-5 text-xl">
           <div class="flex justify-between">
             <div>
               <slot name="header">
@@ -21,17 +21,18 @@
               <button
                 type="button"
                 @click="$emit('close')"
-              ><span class="mdi mdi-close hover:text-orange-800 hover:shadown"></span></button>
+              ><span class="mdi mdi-close hover:text-orange-800 hover:shadown"></span>
+              </button>
             </div>
           </div>
         </div>
 
-        <div class="modal-body px-5 py-3">
+        <div class="modal-body px-10 py-5 bg-gray-100">
           <slot name="body">
           </slot>
         </div>
 
-        <div class="modal-footer px-5 py-3">
+        <div class="modal-footer px-10 py-5 bg-gray-100">
           <slot name="footer">
           </slot>
         </div>

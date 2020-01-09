@@ -13,10 +13,14 @@
           v-model="email"
           id="form-add-new-email"
           type="email"
-          class="px-3 py-2 focus:bg-gray-200 border rounded-lg focus:shadow mt-5"
+          class="px-3 py-2 focus:bg-gray-200 border border-orange-500 focus:border-orange-300 rounded-lg focus:shadow mt-5"
+          placeholder="pessoa@email.com"
           required
           @keyup.enter="confirm"
         >
+        <small class="font-thin mt-1 text-gray-700">
+          * Campo obrigatório
+        </small>
       </div>
     </div>
 
@@ -25,10 +29,12 @@
         <button
           class="px-3 py-1 text-orange-700 hover:text-orange-600 hover:shadown-lg"
           @click="$emit('close')"
+          title="Cancelar adição de participante"
         >Cancelar
         </button>
         <button
           class="px-3 py-1 bg-orange-700 text-white hover:bg-orange-600 hover:shadown-lg"
+          title="Confirmar adição do participante"
           @click="confirm"
         >
           Adicionar

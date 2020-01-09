@@ -8,7 +8,7 @@
 
     <div slot="body">
       <contact-form
-        @findContacts="findContacts"
+        @findContacts="$emit('findContacts')"
         :contact="contact"
         :actions="actions"
       />
@@ -24,6 +24,9 @@
         required: true
       },
       contact: {
+        required: true
+      },
+      showModal: {
         required: true
       }
     }

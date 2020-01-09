@@ -1,6 +1,6 @@
 <template>
   <div class="bg-gray-100 h-10 w-full my-2 px-3 py-1 flex justify-between items-center">
-    <div class="overflow-x-auto mr-2">
+    <div class="overflow-x-auto mr-2 w-full" :class="{'font-bold': contact !== undefined}">
       {{ contact ? contact.name : participant}}
     </div>
     <div class="flex justify-end">
@@ -16,16 +16,16 @@
         v-if="contact"
         class="mr-1"
       >
-        <span class="mdi mdi-account-edit"/>
+        <span class="mdi mdi-pen"/>
       </button>
 
       <button @click="$emit('remove', participant)"><span class="mdi mdi-delete"/></button>
     </div>
-    <ContactModalForm
+    <contact-modal-form
       @close="showModal = false"
       @findContacts="findContacts"
       :show-modal="showModal"
-      :contact="contact"
+      :contact="contactModal"
       :actions="contactActions"
     />
   </div>
@@ -64,23 +64,24 @@
           this.actions.updateContact,
           this.actions.destroyContact
         ]
-      },
-
-      addContact () {
-        this.contactModal = {email: this.participant, phones: []}
-        this.showModal = true
-      },
-
-      editContact () {
-        this.contactModal = Object.assign(this.contact)
-        this.showModal = true
-      },
-
-      findContacts () {
-        this.$emit('close')
-        this.$emit('findContacts')
       }
-    }
+    },
+     methods: {
+       addContact () {
+         this.contactModal = {email: this.participant, phones: []}
+         this.showModal = true
+       },
+
+       editContact () {
+         this.contactModal = Object.assign(this.contact, {phones: []})
+         this.showModal = true
+       },
+
+       findContacts () {
+         this.$emit('findContacts')
+         this.showModal = false
+       }
+     }
   }
 </script>
 

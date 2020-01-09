@@ -7,16 +7,44 @@
             class="w-full text-lg text-gray-800"
             :for="`title-${randomId}`"
           >
-            Titulo
+            Título
           </label>
         </div>
         <div class="w-full md:w-5/6">
           <input
             :id="`title-${randomId}`"
+            v-model="title"
             type="text"
-            class="w-full text-gray-900 focus:bg-gray-100 focus:shadow rounded-lg px-3 py-2 hover:border hover:border-orange-500"
+            class="w-full text-gray-900 focus:bg-gray-100 focus:shadow-lg shadow rounded-lg px-3 py-2 hover:border hover:border-orange-500"
           />
 
+        </div>
+      </div>
+      <div class="mb-5 w-full flex flex-wrap items-center">
+        <div class="w-full md:w-1/2 flex items-center">
+          <div class="md:mr-24">
+            <label class="text-lg text-gray-900">Data</label>
+          </div>
+          <div class="w-full ml-3">
+            <input
+              class="w-full px-3 py-2 text-gray-900 bg-gray-300 focus:shadow-lg shadow rounded-lg hover:border hover:border-orange-500"
+              type="text"
+              readonly
+              :value="dateCalendar.toLocaleString('pt-BR', { year: 'numeric', month: 'numeric', day: 'numeric' })"
+            >
+          </div>
+        </div>
+        <div class="w-full md:w-1/2 flex items-center">
+          <div class="mx-16">
+            <label class="text-lg text-gray-900">Horário</label>
+          </div>
+          <input
+            @keyup="verifyHours"
+            class="w-full px-3 py-2 text-gray-900 focus:bg-gray-100 focus:shadow-lg shadow rounded-lg hover:border hover:border-orange-500"
+            type="text"
+            v-mask="'##:##'"
+            v-model="hour"
+          >
         </div>
       </div>
       <div class="w-full h-full flex flex-wrap items-center">
@@ -28,9 +56,10 @@
         </div>
         <div class="w-full h-full md:w-5/6">
           <textarea
-            class="w-full h-full text-gray-900 focus:bg-gray-100 focus:shadow rounded-lg px-3 py-2 hover:border hover:border-orange-500"
-            name="description-agenda"
             :id="`description-${randomId}`"
+            v-model="description"
+            class="w-full h-full text-gray-900 focus:bg-gray-100 focus:shadow-lg shadow rounded-lg px-3 py-2 hover:border hover:border-orange-500"
+            name="description-agenda"
             cols="30"
           />
         </div>
@@ -101,7 +130,10 @@
       return {
         showModal: false,
         contact: {phones: []},
-        participants: []
+        title: '',
+        hour: '',
+        description: '',
+        participants: ['john.snow@sabedenada.got', 'fulano@lambari.lol']
       }
     },
     computed: {
@@ -121,6 +153,14 @@
       },
       removeParticipant (email) {
         this.participants.splice(this.participants.indexOf(email), 1)
+      },
+      verifyHours () {
+        if (this.hour.length < 5) return
+
+        let time = this.hour.split(':')
+        time[0] = parseInt(time[0]) % 24 < 10 ? '0' + parseInt(time[0]) % 24 : (parseInt(time[0]) % 24).toString()
+        time[1] = parseInt(time[1]) % 60 < 10 ? '0' + parseInt(time[1]) % 60 : (parseInt(time[1]) % 60).toString()
+        this.hour = time.join(':')
       }
     }
   }
