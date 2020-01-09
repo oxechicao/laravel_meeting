@@ -1829,6 +1829,171 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Agenda/AgendaAddNewParticipantModal.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Agenda/AgendaAddNewParticipantModal.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "AgendaAddNewParticipantModal",
+  props: {
+    showModal: {
+      "default": false
+    }
+  },
+  data: function data() {
+    return {
+      email: ''
+    };
+  },
+  methods: {
+    confirm: function confirm() {
+      if (this.email !== '') this.$emit('addParticipant', this.email);
+      this.email = '';
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Agenda/AgendaCardParticipantAdded.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Agenda/AgendaCardParticipantAdded.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "AgendaCardParticipantAdded",
+  props: {
+    contacts: {
+      required: true
+    },
+    participant: {
+      required: true
+    },
+    actions: {
+      required: true
+    }
+  },
+  data: function data() {
+    return {
+      showModal: false,
+      contactModal: {
+        phones: []
+      }
+    };
+  },
+  computed: {
+    contact: function contact() {
+      var _this = this;
+
+      return this.contacts.find(function (c) {
+        return c.email === _this.participant;
+      });
+    },
+    contactActions: function contactActions() {
+      return [this.actions.storeContact, this.actions.updateContact, this.actions.destroyContact];
+    },
+    addContact: function addContact() {
+      this.contactModal = {
+        email: this.participant,
+        phones: []
+      };
+      this.showModal = true;
+    },
+    editContact: function editContact() {
+      this.contactModal = Object.assign(this.contact);
+      this.showModal = true;
+    },
+    findContacts: function findContacts() {
+      this.$emit('close');
+      this.$emit('findContacts');
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Agenda/AgendaForm.vue?vue&type=script&lang=js&":
 /*!****************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Agenda/AgendaForm.vue?vue&type=script&lang=js& ***!
@@ -1867,11 +2032,104 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'AgendaForm',
+  props: {
+    actions: {
+      required: true
+    },
+    dateCalendar: {
+      required: true
+    },
+    contacts: {
+      required: true
+    }
+  },
+  data: function data() {
+    return {
+      showModal: false,
+      contact: {
+        phones: []
+      },
+      participants: []
+    };
+  },
   computed: {
     randomId: function randomId() {
       return 'form-agenda-' + (Math.random() * 1000 + Math.random() * 100);
+    }
+  },
+  methods: {
+    addNewParticipant: function addNewParticipant() {
+      this.showModal = true;
+    },
+    addParticipant: function addParticipant(email) {
+      if (!this.participants.find(function (p) {
+        return p === email;
+      })) {
+        this.participants.push(email);
+      }
+
+      this.showModal = false;
+    },
+    removeParticipant: function removeParticipant(email) {
+      this.participants.splice(this.participants.indexOf(email), 1);
     }
   }
 });
@@ -1906,8 +2164,58 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'AgendaIndex'
+  name: 'AgendaIndex',
+  props: {
+    actions: {
+      required: true
+    }
+  },
+  mounted: function mounted() {
+    this.getAllContacts();
+  },
+  data: function data() {
+    return {
+      contacts: [],
+      attibutesCalendar: [{
+        key: 'currentDay',
+        highlight: {
+          color: 'orange'
+        },
+        dates: new Date()
+      }],
+      dateCalendar: new Date()
+    };
+  },
+  methods: {
+    dayClicked: function dayClicked(e) {
+      this.dateCalendar = e.date;
+      this.attibutesCalendar = this.attibutesCalendar.map(function (attr) {
+        if (attr.key === 'currentDay') {
+          attr.dates = e.date;
+        }
+
+        return attr;
+      });
+    },
+    getAllContacts: function getAllContacts() {
+      var _this = this;
+
+      window.axios.get(this.actions.getAllContacts).then(function (response) {
+        _this.contacts = response.data;
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -2390,6 +2698,47 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Contact/ContactModalForm.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Contact/ContactModalForm.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "ContactModalForm",
+  props: {
+    actions: {
+      required: true
+    },
+    contact: {
+      required: true
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Contact/ContactRemoveConfirm.vue?vue&type=script&lang=js&":
 /*!***************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Contact/ContactRemoveConfirm.vue?vue&type=script&lang=js& ***!
@@ -2443,6 +2792,130 @@ __webpack_require__.r(__webpack_exports__);
       this.$emit('delete');
       this.$emit('close');
     }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CustomCalendar.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/CustomCalendar.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    var month = new Date().getMonth();
+    var year = new Date().getFullYear();
+    return {
+      masks: {
+        weekdays: 'WWW'
+      },
+      attributes: [{
+        key: 1,
+        customData: {
+          title: 'Lunch with mom.',
+          "class": 'bg-red-600 text-white'
+        },
+        dates: new Date(year, month, 1)
+      }, {
+        key: 2,
+        customData: {
+          title: 'Take Noah to basketball practice',
+          "class": 'bg-blue-500 text-white'
+        },
+        dates: new Date(year, month, 2)
+      }, {
+        key: 3,
+        customData: {
+          title: "Noah's basketball game.",
+          "class": 'bg-blue-500 text-white'
+        },
+        dates: new Date(year, month, 5)
+      }, {
+        key: 4,
+        customData: {
+          title: 'Take car to the shop',
+          "class": 'bg-indigo-500 text-white'
+        },
+        dates: new Date(year, month, 5)
+      }, {
+        key: 4,
+        customData: {
+          title: 'Meeting with new client.',
+          "class": 'bg-teal-500 text-white'
+        },
+        dates: new Date(year, month, 7)
+      }, {
+        key: 5,
+        customData: {
+          title: "Mia's gymnastics practice.",
+          "class": 'bg-pink-500 text-white'
+        },
+        dates: new Date(year, month, 11)
+      }, {
+        key: 6,
+        customData: {
+          title: 'Cookout with friends.',
+          "class": 'bg-orange-500 text-white'
+        },
+        dates: {
+          months: 5,
+          ordinalWeekdays: {
+            2: 1
+          }
+        }
+      }, {
+        key: 7,
+        customData: {
+          title: "Mia's gymnastics recital.",
+          "class": 'bg-pink-500 text-white'
+        },
+        dates: new Date(year, month, 22)
+      }, {
+        key: 8,
+        customData: {
+          title: 'Visit great grandma.',
+          "class": 'bg-red-600 text-white'
+        },
+        dates: new Date(year, month, 25)
+      }]
+    };
   }
 });
 
@@ -2777,6 +3250,25 @@ __webpack_require__.r(__webpack_exports__);
     }
   }
 });
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CustomCalendar.vue?vue&type=style&index=0&id=f34a550c&scoped=true&lang=css&":
+/*!********************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--7-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/CustomCalendar.vue?vue&type=style&index=0&id=f34a550c&scoped=true&lang=css& ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "[data-v-f34a550c]::-webkit-scrollbar {\n  width: 0px;\n}\n[data-v-f34a550c]::-webkit-scrollbar-track {\n  display: none;\n}\n[data-v-f34a550c] .custom-calendar.vc-container {\n  --day-border: 1px solid #b8c2cc;\n  --day-border-highlight: 1px solid #b8c2cc;\n  --day-width: 90px;\n  --day-height: 90px;\n  --weekday-bg: #f8fafc;\n  --weekday-border: 1px solid #eaeaea;\n  border-radius: 0;\n}\n[data-v-f34a550c] .custom-calendar.vc-container .vc-header {\n  background-color: #f1f5f8;\n  padding: 10px 0;\n}\n[data-v-f34a550c] .custom-calendar.vc-container .vc-weeks {\n  padding: 0;\n}\n[data-v-f34a550c] .custom-calendar.vc-container .vc-weekday {\n  background-color: var(--weekday-bg);\n  border-bottom: var(--weekday-border);\n  border-top: var(--weekday-border);\n  padding: 5px 0;\n}\n[data-v-f34a550c] .custom-calendar.vc-container .vc-day {\n  padding: 0 5px 3px 5px;\n  text-align: left;\n  height: var(--day-height);\n  min-width: var(--day-width);\n  background-color: white;\n}\n[data-v-f34a550c] .custom-calendar.vc-container .vc-day .weekday-1,[data-v-f34a550c] .custom-calendar.vc-container .vc-day .weekday-7 {\n  background-color: #eff8ff;\n}\n[data-v-f34a550c] .custom-calendar.vc-container .vc-day :not(.on-bottom) {\n  border-bottom: var(--day-border);\n}\n[data-v-f34a550c] .custom-calendar.vc-container .vc-day :not(.on-bottom) .weekday-1 {\n  border-bottom: var(--day-border-highlight);\n}\n[data-v-f34a550c] .custom-calendar.vc-container .vc-day :not(.on-right) {\n  border-right: var(--day-border);\n}\n[data-v-f34a550c] .custom-calendar.vc-container .vc-day-dots {\n  margin-bottom: 5px;\n}\n\n", ""]);
+
+// exports
+
 
 /***/ }),
 
@@ -33657,6 +34149,36 @@ process.umask = function() { return 0; };
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CustomCalendar.vue?vue&type=style&index=0&id=f34a550c&scoped=true&lang=css&":
+/*!************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--7-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/CustomCalendar.vue?vue&type=style&index=0&id=f34a550c&scoped=true&lang=css& ***!
+  \************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--7-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--7-2!../../../node_modules/vue-loader/lib??vue-loader-options!./CustomCalendar.vue?vue&type=style&index=0&id=f34a550c&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CustomCalendar.vue?vue&type=style&index=0&id=f34a550c&scoped=true&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/VueModal.vue?vue&type=style&index=0&id=0c579eb2&scoped=true&lang=css&":
 /*!******************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader??ref--7-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/VueModal.vue?vue&type=style&index=0&id=0c579eb2&scoped=true&lang=css& ***!
@@ -34308,6 +34830,200 @@ var r="undefined"!==typeof window&&"undefined"!==typeof document,o=["Edge","Trid
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Agenda/AgendaAddNewParticipantModal.vue?vue&type=template&id=e7c37e26&scoped=true&":
+/*!**************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Agenda/AgendaAddNewParticipantModal.vue?vue&type=template&id=e7c37e26&scoped=true& ***!
+  \**************************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "vue-modal",
+    {
+      ref: "vue-modal-component",
+      attrs: { showModal: _vm.showModal },
+      on: {
+        close: function($event) {
+          return _vm.$emit("close")
+        }
+      }
+    },
+    [
+      _c("div", { attrs: { slot: "header" }, slot: "header" }, [
+        _vm._v("Adicionar novo participante")
+      ]),
+      _vm._v(" "),
+      _c("div", { attrs: { slot: "body" }, slot: "body" }, [
+        _c("div", { staticClass: "flex flex-col text-gray-900" }, [
+          _c(
+            "label",
+            { staticClass: "text-lg", attrs: { for: "form-add-new-email" } },
+            [_vm._v("E-mail")]
+          ),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.email,
+                expression: "email"
+              }
+            ],
+            staticClass:
+              "px-3 py-2 focus:bg-gray-200 border rounded-lg focus:shadow mt-5",
+            attrs: { id: "form-add-new-email", type: "email", required: "" },
+            domProps: { value: _vm.email },
+            on: {
+              keyup: function($event) {
+                if (
+                  !$event.type.indexOf("key") &&
+                  _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+                ) {
+                  return null
+                }
+                return _vm.confirm($event)
+              },
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.email = $event.target.value
+              }
+            }
+          })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { attrs: { slot: "footer" }, slot: "footer" }, [
+        _c("div", { staticClass: "flex justify-between" }, [
+          _c(
+            "button",
+            {
+              staticClass:
+                "px-3 py-1 text-orange-700 hover:text-orange-600 hover:shadown-lg",
+              on: {
+                click: function($event) {
+                  return _vm.$emit("close")
+                }
+              }
+            },
+            [_vm._v("Cancelar\n      ")]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass:
+                "px-3 py-1 bg-orange-700 text-white hover:bg-orange-600 hover:shadown-lg",
+              on: { click: _vm.confirm }
+            },
+            [_vm._v("\n        Adicionar\n      ")]
+          )
+        ])
+      ])
+    ]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Agenda/AgendaCardParticipantAdded.vue?vue&type=template&id=43442411&scoped=true&":
+/*!************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Agenda/AgendaCardParticipantAdded.vue?vue&type=template&id=43442411&scoped=true& ***!
+  \************************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      staticClass:
+        "bg-gray-100 h-10 w-full my-2 px-3 py-1 flex justify-between items-center"
+    },
+    [
+      _c("div", { staticClass: "overflow-x-auto mr-2" }, [
+        _vm._v(
+          "\n    " +
+            _vm._s(_vm.contact ? _vm.contact.name : _vm.participant) +
+            "\n  "
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "flex justify-end" }, [
+        !_vm.contact
+          ? _c(
+              "button",
+              { staticClass: "mr-1", on: { click: _vm.addContact } },
+              [_c("span", { staticClass: "mdi mdi-plus-box-outline" })]
+            )
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.contact
+          ? _c(
+              "button",
+              { staticClass: "mr-1", on: { click: _vm.editContact } },
+              [_c("span", { staticClass: "mdi mdi-account-edit" })]
+            )
+          : _vm._e(),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            on: {
+              click: function($event) {
+                return _vm.$emit("remove", _vm.participant)
+              }
+            }
+          },
+          [_c("span", { staticClass: "mdi mdi-delete" })]
+        )
+      ]),
+      _vm._v(" "),
+      _c("ContactModalForm", {
+        attrs: {
+          "show-modal": _vm.showModal,
+          contact: _vm.contact,
+          actions: _vm.contactActions
+        },
+        on: {
+          close: function($event) {
+            _vm.showModal = false
+          },
+          findContacts: _vm.findContacts
+        }
+      })
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Agenda/AgendaForm.vue?vue&type=template&id=0302b6d0&scoped=true&":
 /*!********************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Agenda/AgendaForm.vue?vue&type=template&id=0302b6d0&scoped=true& ***!
@@ -34323,46 +35039,140 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "flex" }, [
-    _c("div", { staticClass: "flex flex-col" }, [
-      _c("div", [
-        _c("label", { attrs: { for: "title-" + _vm.randomId } }, [
-          _vm._v("Titulo")
+  return _c(
+    "div",
+    { staticClass: "flex justify-start w-full h-full mb-16 text-gray-900" },
+    [
+      _c("div", { staticClass: "flex flex-col w-full md:w-8/12 mr-10" }, [
+        _c("div", { staticClass: "mb-5 w-full flex flex-wrap items-center" }, [
+          _c("div", { staticClass: "w-full md:w-1/6" }, [
+            _c(
+              "label",
+              {
+                staticClass: "w-full text-lg text-gray-800",
+                attrs: { for: "title-" + _vm.randomId }
+              },
+              [_vm._v("\n          Titulo\n        ")]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "w-full md:w-5/6" }, [
+            _c("input", {
+              staticClass:
+                "w-full text-gray-900 focus:bg-gray-100 focus:shadow rounded-lg px-3 py-2 hover:border hover:border-orange-500",
+              attrs: { id: "title-" + _vm.randomId, type: "text" }
+            })
+          ])
         ]),
         _vm._v(" "),
-        _c("input", { attrs: { id: "title-" + _vm.randomId, type: "text" } })
+        _c(
+          "div",
+          { staticClass: "w-full h-full flex flex-wrap items-center" },
+          [
+            _c("div", { staticClass: "w-full md:w-1/6" }, [
+              _c(
+                "label",
+                {
+                  staticClass: "text-lg text-gray-900",
+                  attrs: { for: "description-" + _vm.randomId }
+                },
+                [_vm._v("Descrição")]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "w-full h-full md:w-5/6" }, [
+              _c("textarea", {
+                staticClass:
+                  "w-full h-full text-gray-900 focus:bg-gray-100 focus:shadow rounded-lg px-3 py-2 hover:border hover:border-orange-500",
+                attrs: {
+                  name: "description-agenda",
+                  id: "description-" + _vm.randomId,
+                  cols: "30"
+                }
+              })
+            ])
+          ]
+        )
       ]),
       _vm._v(" "),
-      _c("div", [
-        _c("label", { attrs: { for: "description-" + _vm.randomId } }, [
-          _vm._v("Descrição")
+      _c("div", { staticClass: "flex flex-col w-full md:w-4/12" }, [
+        _c("div", { staticClass: "flex justify-between items-center" }, [
+          _c("p", { staticClass: "text-lg" }, [_vm._v("Participantes")]),
+          _vm._v(" "),
+          _c("button", {
+            staticClass: "mdi mdi-plus",
+            attrs: { title: "Adicionar participante" },
+            on: { click: _vm.addNewParticipant }
+          })
         ]),
         _vm._v(" "),
-        _c("textarea", {
-          attrs: {
-            name: "description-agenda",
-            id: "description-" + _vm.randomId,
-            cols: "30",
-            rows: "5"
-          }
-        })
-      ])
-    ]),
-    _vm._v(" "),
-    _vm._m(0)
-  ])
+        _c(
+          "div",
+          { staticClass: "h-full max:h-full overflow-y-scroll pr-3 mb-3" },
+          [
+            _vm.participants.length === 0
+              ? _c("div", { staticClass: "mx-5 my-5" }, [
+                  _vm._v("\n        Nenhum participante adicionado\n      ")
+                ])
+              : _vm._l(_vm.participants, function(participant, index) {
+                  return _c(
+                    "div",
+                    { key: index },
+                    [
+                      _c("agenda-card-participant-added", {
+                        attrs: {
+                          actions: _vm.actions,
+                          contacts: _vm.contacts,
+                          participant: participant
+                        },
+                        on: {
+                          close: function($event) {
+                            _vm.showModal = false
+                          },
+                          remove: _vm.removeParticipant,
+                          findContacts: function($event) {
+                            return _vm.$emit("findContacts")
+                          }
+                        }
+                      })
+                    ],
+                    1
+                  )
+                })
+          ],
+          2
+        ),
+        _vm._v(" "),
+        _vm._m(0)
+      ]),
+      _vm._v(" "),
+      _c("agenda-add-new-participant-modal", {
+        attrs: { "show-modal": _vm.showModal, contact: _vm.contact },
+        on: {
+          close: function($event) {
+            _vm.showModal = false
+          },
+          addParticipant: _vm.addParticipant
+        }
+      })
+    ],
+    1
+  )
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "flex flex-col" }, [
-      _c("div", { staticClass: "flex justify-between" }, [
-        _c("p", [_vm._v("Participantes")]),
-        _vm._v(" "),
-        _c("span", { staticClass: "mdi mdi-plus" })
-      ])
+    return _c("div", { staticClass: "self-end w-full" }, [
+      _c(
+        "button",
+        {
+          staticClass:
+            "px-3 py-2 w-full bg-orange-700 text-white text-lg rounded-lg hover:shadow-lg hover:bg-orange-600"
+        },
+        [_vm._v("\n        Agendar reunião\n      ")]
+      )
     ])
   }
 ]
@@ -34388,15 +35198,46 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "flex flex-col w-full" }, [
-    _c("div", { staticClass: "flex" }, [
-      _c("div", [_c("v-calendar")], 1),
+    _c("div", { staticClass: "flex w-full" }, [
+      _c(
+        "div",
+        { staticClass: "h-full" },
+        [
+          _c("v-calendar", {
+            attrs: { "is-expanded": "", attributes: _vm.attibutesCalendar },
+            on: { dayclick: _vm.dayClicked },
+            model: {
+              value: _vm.dateCalendar,
+              callback: function($$v) {
+                _vm.dateCalendar = $$v
+              },
+              expression: "dateCalendar"
+            }
+          })
+        ],
+        1
+      ),
       _vm._v(" "),
-      _c("div", [_c("agenda-form")], 1)
+      _c(
+        "div",
+        { staticClass: "h-64 ml-0 md:ml-10  w-1/2" },
+        [
+          _c("agenda-form", {
+            attrs: {
+              actions: _vm.actions,
+              dateCalendar: _vm.dateCalendar,
+              contacts: _vm.contacts
+            },
+            on: { findContacts: _vm.getAllContacts }
+          })
+        ],
+        1
+      )
     ]),
     _vm._v(" "),
-    _c("div", [_vm._v("\n      vizualização\n    ")]),
+    _c("div", [_vm._v("\n    vizualização\n  ")]),
     _vm._v(" "),
-    _c("div", [_vm._v("\n      cards reuniões\n    ")])
+    _c("div", [_vm._v("\n    cards reuniões\n  ")])
   ])
 }
 var staticRenderFns = []
@@ -34983,6 +35824,58 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Contact/ContactModalForm.vue?vue&type=template&id=15f1326b&scoped=true&":
+/*!***************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Contact/ContactModalForm.vue?vue&type=template&id=15f1326b&scoped=true& ***!
+  \***************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "vue-modal",
+    {
+      ref: "vue-modal-component-contact",
+      attrs: { showModal: _vm.showModal },
+      on: {
+        close: function($event) {
+          return _vm.$emit("close")
+        }
+      }
+    },
+    [
+      _c("div", { attrs: { slot: "header" }, slot: "header" }, [
+        _vm._v("Formulário de contato")
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { attrs: { slot: "body" }, slot: "body" },
+        [
+          _c("contact-form", {
+            attrs: { contact: _vm.contact, actions: _vm.actions },
+            on: { findContacts: _vm.findContacts }
+          })
+        ],
+        1
+      )
+    ]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Contact/ContactRemoveConfirm.vue?vue&type=template&id=2716d076&scoped=true&":
 /*!*******************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Contact/ContactRemoveConfirm.vue?vue&type=template&id=2716d076&scoped=true& ***!
@@ -35052,6 +35945,95 @@ var render = function() {
         ])
       ])
     ]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CustomCalendar.vue?vue&type=template&id=f34a550c&scoped=true&":
+/*!*****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/CustomCalendar.vue?vue&type=template&id=f34a550c&scoped=true& ***!
+  \*****************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "text-center section" },
+    [
+      _c("h2", { staticClass: "h2" }, [_vm._v("Custom Calendars")]),
+      _vm._v(" "),
+      _c("p", { staticClass: "text-lg font-medium text-gray-600 mb-6" }, [
+        _vm._v("\n    Roll your own calendars using scoped slots\n  ")
+      ]),
+      _vm._v(" "),
+      _c("v-calendar", {
+        staticClass: "custom-calendar max-w-full",
+        attrs: {
+          masks: _vm.masks,
+          attributes: _vm.attributes,
+          "disable-page-swipe": ""
+        },
+        scopedSlots: _vm._u([
+          {
+            key: "day-content",
+            fn: function(ref) {
+              var day = ref.day
+              var attributes = ref.attributes
+              return _c(
+                "div",
+                { staticClass: "flex flex-col h-full z-10 overflow-hidden" },
+                [
+                  _c(
+                    "span",
+                    { staticClass: "day-label text-sm text-gray-900" },
+                    [_vm._v(_vm._s(day.day))]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "flex-grow overflow-y-scroll overflow-x-auto"
+                    },
+                    _vm._l(attributes, function(attr) {
+                      return _c(
+                        "p",
+                        {
+                          staticClass:
+                            "text-xs leading-tight rounded-sm p-1 mt-0 mb-1",
+                          class: attr.customData.class
+                        },
+                        [
+                          _vm._v(
+                            "\n          " +
+                              _vm._s(attr.customData.title) +
+                              "\n        "
+                          )
+                        ]
+                      )
+                    }),
+                    0
+                  )
+                ]
+              )
+            }
+          }
+        ])
+      })
+    ],
+    1
   )
 }
 var staticRenderFns = []
@@ -47684,6 +48666,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 
 Vue.component('example-component', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue")["default"]);
 Vue.component('vue-modal', __webpack_require__(/*! ./components/VueModal.vue */ "./resources/js/components/VueModal.vue")["default"]);
+Vue.component('custom-calendar', __webpack_require__(/*! ./components/CustomCalendar.vue */ "./resources/js/components/CustomCalendar.vue")["default"]);
 Vue.component('card-meeting', __webpack_require__(/*! ./components/CardMeeting.vue */ "./resources/js/components/CardMeeting.vue")["default"]);
 Vue.component('content-meeting', __webpack_require__(/*! ./components/CardMeeting/ContentMeeting.vue */ "./resources/js/components/CardMeeting/ContentMeeting.vue")["default"]);
 Vue.component('empty-meeting', __webpack_require__(/*! ./components/CardMeeting/EmptyMeeting.vue */ "./resources/js/components/CardMeeting/EmptyMeeting.vue")["default"]);
@@ -47694,8 +48677,11 @@ Vue.component('contact-index', __webpack_require__(/*! ./components/Contact/Cont
 Vue.component('contact-card', __webpack_require__(/*! ./components/Contact/ContactCard */ "./resources/js/components/Contact/ContactCard.vue")["default"]);
 Vue.component('contact-form', __webpack_require__(/*! ./components/Contact/ContactForm */ "./resources/js/components/Contact/ContactForm.vue")["default"]);
 Vue.component('contact-remove-confirm', __webpack_require__(/*! ./components/Contact/ContactRemoveConfirm */ "./resources/js/components/Contact/ContactRemoveConfirm.vue")["default"]);
+Vue.component('contact-modal-form', __webpack_require__(/*! ./components/Contact/ContactModalForm */ "./resources/js/components/Contact/ContactModalForm.vue")["default"]);
 Vue.component('agenda-index', __webpack_require__(/*! ./components/Agenda/AgendaIndex */ "./resources/js/components/Agenda/AgendaIndex.vue")["default"]);
 Vue.component('agenda-form', __webpack_require__(/*! ./components/Agenda/AgendaForm */ "./resources/js/components/Agenda/AgendaForm.vue")["default"]);
+Vue.component('agenda-add-new-participant-modal', __webpack_require__(/*! ./components/Agenda/AgendaAddNewParticipantModal */ "./resources/js/components/Agenda/AgendaAddNewParticipantModal.vue")["default"]);
+Vue.component('agenda-card-participant-added', __webpack_require__(/*! ./components/Agenda/AgendaCardParticipantAdded */ "./resources/js/components/Agenda/AgendaCardParticipantAdded.vue")["default"]);
 
 Vue.use(v_calendar__WEBPACK_IMPORTED_MODULE_0___default.a);
 
@@ -47752,6 +48738,144 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     encrypted: true
 // });
+
+/***/ }),
+
+/***/ "./resources/js/components/Agenda/AgendaAddNewParticipantModal.vue":
+/*!*************************************************************************!*\
+  !*** ./resources/js/components/Agenda/AgendaAddNewParticipantModal.vue ***!
+  \*************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _AgendaAddNewParticipantModal_vue_vue_type_template_id_e7c37e26_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AgendaAddNewParticipantModal.vue?vue&type=template&id=e7c37e26&scoped=true& */ "./resources/js/components/Agenda/AgendaAddNewParticipantModal.vue?vue&type=template&id=e7c37e26&scoped=true&");
+/* harmony import */ var _AgendaAddNewParticipantModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AgendaAddNewParticipantModal.vue?vue&type=script&lang=js& */ "./resources/js/components/Agenda/AgendaAddNewParticipantModal.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _AgendaAddNewParticipantModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _AgendaAddNewParticipantModal_vue_vue_type_template_id_e7c37e26_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _AgendaAddNewParticipantModal_vue_vue_type_template_id_e7c37e26_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "e7c37e26",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Agenda/AgendaAddNewParticipantModal.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Agenda/AgendaAddNewParticipantModal.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************!*\
+  !*** ./resources/js/components/Agenda/AgendaAddNewParticipantModal.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AgendaAddNewParticipantModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./AgendaAddNewParticipantModal.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Agenda/AgendaAddNewParticipantModal.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AgendaAddNewParticipantModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Agenda/AgendaAddNewParticipantModal.vue?vue&type=template&id=e7c37e26&scoped=true&":
+/*!********************************************************************************************************************!*\
+  !*** ./resources/js/components/Agenda/AgendaAddNewParticipantModal.vue?vue&type=template&id=e7c37e26&scoped=true& ***!
+  \********************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AgendaAddNewParticipantModal_vue_vue_type_template_id_e7c37e26_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./AgendaAddNewParticipantModal.vue?vue&type=template&id=e7c37e26&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Agenda/AgendaAddNewParticipantModal.vue?vue&type=template&id=e7c37e26&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AgendaAddNewParticipantModal_vue_vue_type_template_id_e7c37e26_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AgendaAddNewParticipantModal_vue_vue_type_template_id_e7c37e26_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Agenda/AgendaCardParticipantAdded.vue":
+/*!***********************************************************************!*\
+  !*** ./resources/js/components/Agenda/AgendaCardParticipantAdded.vue ***!
+  \***********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _AgendaCardParticipantAdded_vue_vue_type_template_id_43442411_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AgendaCardParticipantAdded.vue?vue&type=template&id=43442411&scoped=true& */ "./resources/js/components/Agenda/AgendaCardParticipantAdded.vue?vue&type=template&id=43442411&scoped=true&");
+/* harmony import */ var _AgendaCardParticipantAdded_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AgendaCardParticipantAdded.vue?vue&type=script&lang=js& */ "./resources/js/components/Agenda/AgendaCardParticipantAdded.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _AgendaCardParticipantAdded_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _AgendaCardParticipantAdded_vue_vue_type_template_id_43442411_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _AgendaCardParticipantAdded_vue_vue_type_template_id_43442411_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "43442411",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Agenda/AgendaCardParticipantAdded.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Agenda/AgendaCardParticipantAdded.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************!*\
+  !*** ./resources/js/components/Agenda/AgendaCardParticipantAdded.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AgendaCardParticipantAdded_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./AgendaCardParticipantAdded.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Agenda/AgendaCardParticipantAdded.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AgendaCardParticipantAdded_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Agenda/AgendaCardParticipantAdded.vue?vue&type=template&id=43442411&scoped=true&":
+/*!******************************************************************************************************************!*\
+  !*** ./resources/js/components/Agenda/AgendaCardParticipantAdded.vue?vue&type=template&id=43442411&scoped=true& ***!
+  \******************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AgendaCardParticipantAdded_vue_vue_type_template_id_43442411_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./AgendaCardParticipantAdded.vue?vue&type=template&id=43442411&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Agenda/AgendaCardParticipantAdded.vue?vue&type=template&id=43442411&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AgendaCardParticipantAdded_vue_vue_type_template_id_43442411_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AgendaCardParticipantAdded_vue_vue_type_template_id_43442411_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
 
 /***/ }),
 
@@ -48307,6 +49431,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/Contact/ContactModalForm.vue":
+/*!**************************************************************!*\
+  !*** ./resources/js/components/Contact/ContactModalForm.vue ***!
+  \**************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ContactModalForm_vue_vue_type_template_id_15f1326b_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ContactModalForm.vue?vue&type=template&id=15f1326b&scoped=true& */ "./resources/js/components/Contact/ContactModalForm.vue?vue&type=template&id=15f1326b&scoped=true&");
+/* harmony import */ var _ContactModalForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ContactModalForm.vue?vue&type=script&lang=js& */ "./resources/js/components/Contact/ContactModalForm.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _ContactModalForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ContactModalForm_vue_vue_type_template_id_15f1326b_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ContactModalForm_vue_vue_type_template_id_15f1326b_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "15f1326b",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Contact/ContactModalForm.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Contact/ContactModalForm.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/components/Contact/ContactModalForm.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ContactModalForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./ContactModalForm.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Contact/ContactModalForm.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ContactModalForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Contact/ContactModalForm.vue?vue&type=template&id=15f1326b&scoped=true&":
+/*!*********************************************************************************************************!*\
+  !*** ./resources/js/components/Contact/ContactModalForm.vue?vue&type=template&id=15f1326b&scoped=true& ***!
+  \*********************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ContactModalForm_vue_vue_type_template_id_15f1326b_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./ContactModalForm.vue?vue&type=template&id=15f1326b&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Contact/ContactModalForm.vue?vue&type=template&id=15f1326b&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ContactModalForm_vue_vue_type_template_id_15f1326b_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ContactModalForm_vue_vue_type_template_id_15f1326b_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/Contact/ContactRemoveConfirm.vue":
 /*!******************************************************************!*\
   !*** ./resources/js/components/Contact/ContactRemoveConfirm.vue ***!
@@ -48371,6 +49564,93 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ContactRemoveConfirm_vue_vue_type_template_id_2716d076_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ContactRemoveConfirm_vue_vue_type_template_id_2716d076_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/CustomCalendar.vue":
+/*!****************************************************!*\
+  !*** ./resources/js/components/CustomCalendar.vue ***!
+  \****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _CustomCalendar_vue_vue_type_template_id_f34a550c_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CustomCalendar.vue?vue&type=template&id=f34a550c&scoped=true& */ "./resources/js/components/CustomCalendar.vue?vue&type=template&id=f34a550c&scoped=true&");
+/* harmony import */ var _CustomCalendar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CustomCalendar.vue?vue&type=script&lang=js& */ "./resources/js/components/CustomCalendar.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _CustomCalendar_vue_vue_type_style_index_0_id_f34a550c_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./CustomCalendar.vue?vue&type=style&index=0&id=f34a550c&scoped=true&lang=css& */ "./resources/js/components/CustomCalendar.vue?vue&type=style&index=0&id=f34a550c&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _CustomCalendar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _CustomCalendar_vue_vue_type_template_id_f34a550c_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _CustomCalendar_vue_vue_type_template_id_f34a550c_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "f34a550c",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/CustomCalendar.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/CustomCalendar.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************!*\
+  !*** ./resources/js/components/CustomCalendar.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CustomCalendar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./CustomCalendar.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CustomCalendar.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CustomCalendar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/CustomCalendar.vue?vue&type=style&index=0&id=f34a550c&scoped=true&lang=css&":
+/*!*************************************************************************************************************!*\
+  !*** ./resources/js/components/CustomCalendar.vue?vue&type=style&index=0&id=f34a550c&scoped=true&lang=css& ***!
+  \*************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_7_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_vue_loader_lib_index_js_vue_loader_options_CustomCalendar_vue_vue_type_style_index_0_id_f34a550c_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--7-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--7-2!../../../node_modules/vue-loader/lib??vue-loader-options!./CustomCalendar.vue?vue&type=style&index=0&id=f34a550c&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CustomCalendar.vue?vue&type=style&index=0&id=f34a550c&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_7_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_vue_loader_lib_index_js_vue_loader_options_CustomCalendar_vue_vue_type_style_index_0_id_f34a550c_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_7_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_vue_loader_lib_index_js_vue_loader_options_CustomCalendar_vue_vue_type_style_index_0_id_f34a550c_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_7_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_vue_loader_lib_index_js_vue_loader_options_CustomCalendar_vue_vue_type_style_index_0_id_f34a550c_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_7_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_vue_loader_lib_index_js_vue_loader_options_CustomCalendar_vue_vue_type_style_index_0_id_f34a550c_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_7_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_vue_loader_lib_index_js_vue_loader_options_CustomCalendar_vue_vue_type_style_index_0_id_f34a550c_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/js/components/CustomCalendar.vue?vue&type=template&id=f34a550c&scoped=true&":
+/*!***********************************************************************************************!*\
+  !*** ./resources/js/components/CustomCalendar.vue?vue&type=template&id=f34a550c&scoped=true& ***!
+  \***********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CustomCalendar_vue_vue_type_template_id_f34a550c_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./CustomCalendar.vue?vue&type=template&id=f34a550c&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CustomCalendar.vue?vue&type=template&id=f34a550c&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CustomCalendar_vue_vue_type_template_id_f34a550c_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CustomCalendar_vue_vue_type_template_id_f34a550c_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -48757,9 +50037,9 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/fthiago/Projetos/free/laravel_meeting/resources/js/app.js */"./resources/js/app.js");
-__webpack_require__(/*! /home/fthiago/Projetos/free/laravel_meeting/resources/sass/app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! /home/fthiago/Projetos/free/laravel_meeting/resources/css/tailwind.css */"./resources/css/tailwind.css");
+__webpack_require__(/*! /home/chicao/Projetos/funceme_mettings/resources/js/app.js */"./resources/js/app.js");
+__webpack_require__(/*! /home/chicao/Projetos/funceme_mettings/resources/sass/app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! /home/chicao/Projetos/funceme_mettings/resources/css/tailwind.css */"./resources/css/tailwind.css");
 
 
 /***/ })

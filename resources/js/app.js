@@ -21,6 +21,7 @@ window.Vue = require('vue');
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('vue-modal', require('./components/VueModal.vue').default);
+Vue.component('custom-calendar', require('./components/CustomCalendar.vue').default);
 
 Vue.component('card-meeting', require('./components/CardMeeting.vue').default);
 Vue.component('content-meeting', require('./components/CardMeeting/ContentMeeting.vue').default);
@@ -34,9 +35,12 @@ Vue.component('contact-index', require('./components/Contact/ContactIndex').defa
 Vue.component('contact-card', require('./components/Contact/ContactCard').default);
 Vue.component('contact-form', require('./components/Contact/ContactForm').default);
 Vue.component('contact-remove-confirm', require('./components/Contact/ContactRemoveConfirm').default);
+Vue.component('contact-modal-form', require('./components/Contact/ContactModalForm').default);
 
 Vue.component('agenda-index', require('./components/Agenda/AgendaIndex').default);
 Vue.component('agenda-form', require('./components/Agenda/AgendaForm').default);
+Vue.component('agenda-add-new-participant-modal', require('./components/Agenda/AgendaAddNewParticipantModal').default);
+Vue.component('agenda-card-participant-added', require('./components/Agenda/AgendaCardParticipantAdded').default);
 
 
 import VCalendar from 'v-calendar';

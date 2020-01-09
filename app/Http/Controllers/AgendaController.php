@@ -15,7 +15,17 @@ class AgendaController extends Controller
      */
     public function index()
     {
-        return view('agenda/index');
+        return view('agenda/index', [
+            'actions' => collect([
+                'store' => route('agenda.store'),
+                'update' => route('agenda.update'),
+                'destroy' => route('agenda.destroy'),
+                'getAllContacts' => route('contact.all'),
+                'storeContact' => route('contact.store'),
+                'destroyContact' => route('contact.destroy'),
+                'updateContact' => route('contact.update'),
+            ])
+        ]);
     }
 
     /**
