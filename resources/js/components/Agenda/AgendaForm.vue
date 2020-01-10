@@ -22,10 +22,10 @@
       </div>
       <div class="mb-5 w-full flex flex-wrap items-center">
         <div class="w-full md:w-1/2 flex items-center">
-          <div class="md:mr-24">
+          <div class="w-full md:w-1/3">
             <label class="text-lg text-gray-900">Data</label>
           </div>
-          <div class="w-full ml-3">
+          <div class="w-full md:w-2/3">
             <input
               class="w-full px-3 py-2 text-gray-900 bg-gray-300 focus:shadow-lg shadow rounded-lg hover:border hover:border-orange-500"
               type="text"
@@ -116,6 +116,7 @@
 
     <agenda-confirm-save
       @close="showConfirModal = false"
+      @getAgendas="$emit('getAgendas')"
       :actions="actions"
       :agenda="agenda"
       :show-modal="showConfirModal"
@@ -138,6 +139,11 @@
       },
       contacts: {
         required: true
+      }
+    },
+    watch: {
+      dateCalendar () {
+        this.agenda.date = this.dateCalendar
       }
     },
     mounted () {

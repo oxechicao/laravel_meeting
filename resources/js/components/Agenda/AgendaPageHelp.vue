@@ -13,7 +13,11 @@
     >
       <div slot="header">Guida da página</div>
       <div slot="body">
-
+        <p class="text-xl font-bold">
+          Dicas
+        </p>
+        <p>Utilize o calendário para registrar uma reunião. Também utilize-o para visualizar a agenda do dia.</p>
+        <p>Dias que contêm alguma reunião possuem um pequeno círculo laranja abaixo do dia.</p>
       </div>
       <div
         slot="footer"

@@ -6,10 +6,10 @@
 >
   <div
     v-if="showModal"
-    class="modal-mask"
+    class="modal-mask overflow-auto bg-gray-100"
   >
     <div class="modal-wrapper px-5 md:px-0">
-      <div class="modal-container w-full md:w-1/2 lg:w-1/3 rounded-lg">
+      <div class="modal-container w-full md:w-1/2 lg:w-1/3 rounded-lg overflow-y-auto max-h-screen">
 
         <div class="modal-header text-orange-700 bg-gray-100 py-5 px-5 text-xl">
           <div class="flex justify-between">
@@ -70,11 +70,11 @@ export default {
   .modal-wrapper {
     display: table-cell;
     vertical-align: middle;
+
   }
 
   .modal-container {
     margin: 0px auto;
-    background-color: #fff;
     border-radius: 2px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
     transition: all .3s ease;
@@ -84,9 +84,5 @@ export default {
   .modal-header h3 {
     margin-top: 0;
     color: #42b983;
-  }
-
-  .modal-body {
-    margin: 20px 0;
   }
 </style>

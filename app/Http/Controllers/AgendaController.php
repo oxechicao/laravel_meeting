@@ -64,7 +64,7 @@ class AgendaController extends Controller
     public function update(Request $request, Agenda $agenda, AgendaRepository $agendaRepository)
     {
         $this->validator($request->all())->validate();
-        return response()->json($agendaRepository->update($request->all()));
+        return response()->json($agendaRepository->update($request->all(), $agenda));
     }
 
     /**
@@ -101,7 +101,7 @@ class AgendaController extends Controller
             'description' => ['string'],
             'date' => ['required', 'date'],
             'hour' => ['required', 'string'],
-            'participants' => ['required', 'array']
+            'participants' => ['array']
         ]);
     }
 }

@@ -11,15 +11,20 @@
       </div>
       <div class="h-64 ml-0 md:ml-10  w-full pr-16">
         <agenda-form
-          @findContacts="getAllContacts"
+          @getAgendas="getAllMeetings"
           :actions="actions"
           :dateCalendar="dateCalendar"
           :contacts="contacts"
         />
       </div>
     </div>
-    <div class="w-full mt-16 pr-16">
-      <agendas-list :meetings="meetings"/>
+    <div class="w-full mt-10 pr-16">
+      <agendas-list
+        :date-calendar="new Date(dateCalendar)"
+        @getAgendas="getAllMeetings"
+        :actions="actions"
+        :meetings="meetings"
+      />
     </div>
   </div>
 </template>
@@ -37,6 +42,7 @@
     mounted () {
       this.getAllContacts()
       this.getAllMeetings()
+      this.defineCalendar()
     },
 
     data () {
@@ -47,7 +53,8 @@
           {
             key: 'currentDay',
             highlight: {
-              color: 'orange'
+              color: 'orange',
+              fillMode: 'light'
             },
             dates: new Date()
           }
@@ -81,7 +88,27 @@
               }
               return item
             })
+            this.defineCalendar()
           })
+      },
+      defineCalendar () {
+        for (let m in this.meetings) {
+          let meeting = this.meetings[m]
+          this.attibutesCalendar.push({
+            key: 'meeting_' + m,
+            dot: {
+              color: 'orange',
+              class: 'bg-orange-500 text-orange-500'
+            },
+            dates: meeting.date
+          })
+        }
+      },
+      sameDate (date, otherDate) {
+        const now = otherDate || new Date()
+        return date.getDay() === now.getDay() &&
+          date.getMonth() === now.getMonth() &&
+          date.getFullYear() === now.getFullYear()
       }
     }
   }

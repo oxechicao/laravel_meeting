@@ -19,7 +19,7 @@ class CreateAgendasTable extends Migration
             $table->text('description')->nullable();
             $table->dateTime('date');
             $table->string('hour')->nullable();
-            $table->json('participants');
+            $table->json('participants')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();

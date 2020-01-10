@@ -32,7 +32,7 @@ Route::middleware(['web', 'auth'])->group(function () {
     Route::get('/agendas', 'AgendaController@index')->name('agenda.index');
     Route::get('/agendas/all', 'AgendaController@getAll')->name('agenda.all');
     Route::post('/agendas/store', 'AgendaController@store')->name('agenda.store');
-    Route::put('/agendas/update/{id?}', 'AgendaController@update')->name('agenda.update');
+    Route::put('/agendas/update/{agenda?}', 'AgendaController@update')->name('agenda.update');
     Route::delete('/agendas/destroy/{agenda?}', 'AgendaController@destroy')->name('agenda.destroy');
 });
 

@@ -40,11 +40,13 @@ Vue.component('contact-modal-form', require('./components/Contact/ContactModalFo
 Vue.component('agenda-index', require('./components/Agenda/AgendaIndex').default);
 Vue.component('agendas-list', require('./components/Agenda/AgendasList').default);
 Vue.component('agenda-list-detailed-card', require('./components/Agenda/AgendaListDetailedCard').default);
+Vue.component('agenda-form-modal', require('./components/Agenda/AgendaFormModal').default);
 Vue.component('agenda-page-help', require('./components/Agenda/AgendaPageHelp').default);
 Vue.component('agenda-form', require('./components/Agenda/AgendaForm').default);
 Vue.component('agenda-add-new-participant-modal', require('./components/Agenda/AgendaAddNewParticipantModal').default);
 Vue.component('agenda-card-participant-added', require('./components/Agenda/AgendaCardParticipantAdded').default);
 Vue.component('agenda-confirm-save', require('./components/Agenda/AgendaConfirmSave').default);
+Vue.component('agenda-remove-confirm', require('./components/Agenda/AgendaRemoveConfirm').default);
 
 
 import VCalendar from 'v-calendar';

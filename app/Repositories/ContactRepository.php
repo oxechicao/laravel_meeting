@@ -11,20 +11,6 @@ use Illuminate\Support\Facades\DB;
 class ContactRepository
 {
     /**
-     * @var Contact
-     */
-    private $contact;
-
-    /**
-     * ContactRepository constructor.
-     */
-    public function __construct()
-
-    {
-        $this->contact = new Contact();
-    }
-
-    /**
      * @param $id
      * @return mixed
      */

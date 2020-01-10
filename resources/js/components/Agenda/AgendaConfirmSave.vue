@@ -7,52 +7,52 @@
       Confirmar agendamento
     </div>
     <div slot="body">
-      <div class="px-10">
-        <table>
-          <tbody>
-          <tr>
-            <td>
-              <span class="field-name">Título:</span>
-            </td>
-            <td>
-              <span>{{agenda.title}}</span>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <span class="field-name">Descrição:</span>
-            </td>
-            <td>
-              <span>{{agenda.description}}</span>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <span class="field-name">Data:</span>
-            </td>
-            <td>
-              <span>{{agenda.date.toLocaleString('pt-BR', {year: 'numeric', day: 'numeric', month: 'numeric', weekday: 'long'})}}</span>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <span class="field-name">Hora:</span>
-            </td>
-            <td>
-              <span>{{agenda.hour}}</span>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <span class="field-name">Participantes:</span>
-            </td>
-            <td>
-              <span>{{agenda.participants.join(', ')}}</span>
-            </td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
+        <div class="px-10">
+          <table>
+            <tbody>
+            <tr>
+              <td>
+                <span class="field-name">Título:</span>
+              </td>
+              <td>
+                <span>{{agenda.title}}</span>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <span class="field-name">Descrição:</span>
+              </td>
+              <td>
+                <span>{{agenda.description}}</span>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <span class="field-name">Data:</span>
+              </td>
+              <td>
+                <span>{{agenda.date.toLocaleString('pt-BR', {year: 'numeric', day: 'numeric', month: 'numeric', weekday: 'long'})}}</span>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <span class="field-name">Hora:</span>
+              </td>
+              <td>
+                <span>{{agenda.hour}}</span>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <span class="field-name">Participantes:</span>
+              </td>
+              <td>
+                <span>{{agenda.participants.join(', ')}}</span>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
     </div>
     <div slot="footer">
       <div class="flex justify-between">
@@ -94,9 +94,17 @@
       },
       storeForm () {
         return window.axios.post(this.actions.store, this.agenda)
+          .then(() => {
+            this.$emit('getAgendas')
+            this.$emit('close')
+          })
       },
       updateForm () {
         return window.axios.put(this.actions.update + '/' + this.agenda.id, this.agenda)
+          .then(() => {
+            this.$emit('getAgendas')
+            this.$emit('close')
+          })
       }
     }
   }
