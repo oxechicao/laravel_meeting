@@ -13,11 +13,11 @@
         <div class="w-full md:w-5/6">
           <input
             :id="`title-${randomId}`"
-            v-model="agenda.title"
+            v-model.trim="$v.agenda.title.$model"
             type="text"
-            class="w-full text-gray-900 focus:bg-gray-100 focus:shadow-lg shadow rounded-lg px-3 py-2 hover:border hover:border-orange-500"
+            class="w-full text-gray-900 focus:bg-gray-100 focus:shadow-lg shadow rounded-lg px-3 py-2"
+            :class="{'border border-red-500': $v.agenda.title.$anyDirty && !$v.agenda.title.required}"
           />
-
         </div>
       </div>
       <div class="mb-5 w-full flex flex-wrap items-center">
@@ -44,6 +44,7 @@
             type="text"
             v-mask="'##:##'"
             v-model="agenda.hour"
+            :class="{'border border-red-500': $v.agenda.hour.$anyDirty && !$v.agenda.hour.required}"
           >
         </div>
       </div>
@@ -124,6 +125,8 @@
 </template>
 
 <script>
+  import {required} from 'vuelidate/lib/validators'
+
   export default {
     name: 'AgendaForm',
     props: {
@@ -137,18 +140,28 @@
         required: true
       }
     },
+    mounted () {
+      this.$v.$reset()
+    },
     data () {
       return {
         showModal: false,
-        showConfirModal: true,
+        showConfirModal: false,
         agenda: {
-          title: 'Reunião dos barcos furados',
-          description: 'Reunião para decidir a existência dos tapa buraco na cidade. A qualidade do asfalto. Os paranauê da vida.',
+          title: '',
+          description: '',
           date: this.dateCalendar,
-          hour: '04:20',
-          participants: ['john.snow@sabedenada.got', 'fulano@lambari.lol']
+          hour: '',
+          participants: []
         },
         contact: {phones: []}
+      }
+    },
+    validations: {
+      agenda: {
+        title: {required},
+        date: {required},
+        hour: {required}
       }
     },
     computed: {
@@ -158,7 +171,10 @@
     },
     methods: {
       saveMeeting () {
-        this.showConfirModal = true
+        this.$v.$touch()
+        if (!this.$v.$invalid) {
+          this.showConfirModal = true
+        }
       },
       addNewParticipant () {
         this.showModal = true

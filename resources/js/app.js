@@ -53,6 +53,10 @@ import VueTheMask from 'vue-the-mask'
 
 Vue.use(VueTheMask)
 
+import Vuelidate from 'vuelidate'
+
+Vue.use(Vuelidate)
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

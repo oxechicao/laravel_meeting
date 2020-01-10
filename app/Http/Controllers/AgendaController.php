@@ -49,32 +49,7 @@ class AgendaController extends Controller
     public function store(Request $request, AgendaRepository $agendaRepository)
     {
         $this->validator($request->all())->validate();
-        return response()->json(
-            $agendaRepository->insert($request->all())
-        );
-
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param \App\Agenda $agenda
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Agenda $agenda)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param \App\Agenda $agenda
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Agenda $agenda)
-    {
-        //
+        return response()->json($agendaRepository->insert($request->all()));
     }
 
     /**
@@ -82,22 +57,25 @@ class AgendaController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      * @param \App\Agenda $agenda
-     * @return \Illuminate\Http\Response
+     * @param AgendaRepository $agendaRepository
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, Agenda $agenda)
+    public function update(Request $request, Agenda $agenda, AgendaRepository $agendaRepository)
     {
-        //
+        $this->validator($request->all())->validate();
+        return response()->json($agendaRepository->update($request->all()));
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param \App\Agenda $agenda
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
      */
     public function destroy(Agenda $agenda)
     {
-        //
+        return response()->json($agenda->delete());
     }
 
     /**
