@@ -25,28 +25,26 @@
           </p>
         </div>
       </div>
-
-      <div
-        v-else
-        v-for="(meeting, im) in dayMeetings"
-        :key="im"
-        class="mt-5 border-2 border-gray-400 flex flex-no-wrap w-full p-5 rounded-lg"
-      >
-        <div class="w-32 mr-5 text-center">
-          <p class="text-lg text-gray-200 font-bold">
-            {{ meeting.date.getDate() < 10 ? '0' + meeting.date.getDate() : meeting.date.getDate() }}/{{
-            (meeting.date.getMonth() + 1) < 10 ? '0' + (meeting.date.getMonth() + 1) : (meeting.date.getMonth() + 1)
-            }}<br>{{
-            meeting.date.getFullYear() }}
-          </p>
-          <p class="text-lg text-gray-300 font-bold"> {{ meeting.date.getHours() < '10' ? '0' +
-            meeting.date.getHours() : meeting.date.getHours() }}:{{ meeting.date.getMinutes() < '10' ? '0' +
-            meeting.date.getMinutes() : meeting.date.getMinutes() }} </p>
-        </div>
-        <div class="flex justify-center align-center items-center">
-          <p class="text-lg">{{ meeting.title }}</p>
+      <div v-else>
+        <div
+          v-for="(meeting, im) in dayMeetings"
+          :key="im"
+          class="mt-5 border-2 border-gray-400 flex flex-no-wrap w-full p-5 rounded-lg"
+        >
+          <div class="w-32 mr-5 text-center">
+            <p class="text-lg text-gray-200 font-bold">
+              {{ meeting.date.toLocaleString('pt-BR', {day: '2-digit', month: '2-digit'}) }}
+              <br>
+              {{ meeting.date.getFullYear() }}
+            </p>
+            <p class="text-lg text-gray-300 font-bold">{{meeting.hour}} </p>
+          </div>
+          <div class="flex justify-center align-center items-center">
+            <p class="text-lg">{{ meeting.title }}</p>
+          </div>
         </div>
       </div>
+
     </div>
   </div>
 </template>
@@ -59,7 +57,7 @@
         required: true
       }
     },
-    data() {
+    data () {
       return {
         attibutesCalendar: [
           {
@@ -76,25 +74,32 @@
         dateCalendar: new Date()
       }
     },
-    mounted() {
-      for (let m in this.meetings) {
-        let meeting = this.meetings[m]
-        this.attibutesCalendar.push({
-          key: 'meeting_' + m,
-          dot: {
-            color: 'orange',
-            class: 'bg-orange-500 text-orange-500'
-          },
-          dates: meeting.date
-        })
-
-        if (this.sameDate(meeting.date)) {
-          this.dayMeetings.push(meeting)
-        }
+    mounted () {
+      this.updateCalendar()
+    },
+    watch: {
+      meetings () {
+        this.updateCalendar()
       }
     },
     methods: {
-      dayClicked(e) {
+      updateCalendar () {
+        for (let m in this.meetings) {
+          let meeting = this.meetings[m]
+          this.attibutesCalendar.push({
+            key: 'meeting_' + m,
+            dot: {
+              color: 'orange'
+            },
+            dates: meeting.date
+          })
+
+          if (this.sameDate(meeting.date)) {
+            this.dayMeetings.push(meeting)
+          }
+        }
+      },
+      dayClicked (e) {
         this.dateCalendar = e.date
         this.attibutesCalendar = this.attibutesCalendar.map(attr => {
           if (attr.key === 'currentDay') {
@@ -113,7 +118,7 @@
 
         this.setCurrentDates(e.date)
       },
-      setCurrentDates(date) {
+      setCurrentDates (date) {
         this.dayMeetings = []
         for (let m in this.meetings) {
           let meeting = this.meetings[m]
@@ -122,7 +127,7 @@
           }
         }
       },
-      sameDate(date, otherDate) {
+      sameDate (date, otherDate) {
         const now = otherDate || new Date()
         return date.getDay() === now.getDay() &&
           date.getMonth() === now.getMonth() &&

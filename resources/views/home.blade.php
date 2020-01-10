@@ -19,8 +19,8 @@
         </div>
     </div>
     <div class="flex flex-col w-full h-full  min-h-screen md:w-2/6 bg-gray-900 items-center">
-        <div class="mx-16 md:mx-10 flex flex-col items-center mt-16 w-full h-full">
-            <right-sidebar></right-sidebar>
+        <div class="mx-16 md:mx-10 flex flex-col items-center w-full h-full">
+            <right-sidebar :actions="['{{route('agenda.all')}}']"></right-sidebar>
         </div>
     </div>
 @endsection

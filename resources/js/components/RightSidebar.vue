@@ -1,8 +1,5 @@
 <template>
   <div class="w-full">
-    <div class="w-full">
-      <quick-actions></quick-actions>
-    </div>
     <div class="my-12 w-full flex justify-center">
       <meeting-calendar :meetings="meetings"></meeting-calendar>
     </div>
@@ -12,39 +9,30 @@
 <script>
   export default {
     name: "RightSidebar",
+    props: {
+      actions: {
+        required: true
+      }
+    },
+    mounted () {
+      this.getAgendas()
+    },
     data () {
       return {
-        meetings: [
-          {
-            title: 'REUNIÃO PARA DISCUTIR A INVASÃO DO VERÃO ORIUNDO DO CENTRO',
-            date: new Date(),
-            contacts: [
-              {
-                name: 'John Snow',
-                email: 'john.snow@sabedenada.com'
-              },
-              {
-                name: 'Adelaide Odacilva',
-                email: 'adecilva@gmail.com'
-              },
-              {
-                name: '',
-                email: 'carla.perez@eotchan.com'
-              }, {
-                name: 'John Snow',
-                email: 'john.snow@sabedenada.com'
-              },
-              {
-                name: 'Adelaide Odacilva',
-                email: 'adecilva@gmail.com'
-              },
-              {
-                name: '',
-                email: 'carla.perez@eotchan.com'
-              }
-            ]
-          }
-        ]
+        meetings: []
+      }
+    },
+    methods: {
+      getAgendas () {
+        window.axios.get(this.actions[0])
+        .then(result => {
+          this.meetings = result.data.map(item => {
+            if (item.hasOwnProperty('date') && item.date) {
+              item.date = new Date(item.date)
+            }
+            return item
+          })
+        })
       }
     }
   }
