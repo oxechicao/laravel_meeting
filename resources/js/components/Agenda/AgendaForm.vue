@@ -43,7 +43,7 @@
             class="w-full px-3 py-2 text-gray-900 focus:bg-gray-100 focus:shadow-lg shadow rounded-lg hover:border hover:border-orange-500"
             type="text"
             v-mask="'##:##'"
-            v-model="agenda.hour"
+            v-model="$v.agenda.hour.$model"
             :class="{'border border-red-500': $v.agenda.hour.$anyDirty && !$v.agenda.hour.required}"
           >
         </div>

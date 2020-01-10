@@ -23,7 +23,8 @@
         name="name"
         id="contact-name"
         class="bg-gray-100 p-2 text-black rounded border-2 focus:bg-gray-200 focus:shadown"
-        v-model="localContact.name"
+        v-model="$v.localContact.name.$model"
+        :class="{'border border-red-500': $v.localContact.name.$anyDirty && !$v.localContact.name.required}"
       >
       <p class="text-gray-500 italic text-sm">* Obrigatório</p>
     </div>
@@ -33,11 +34,12 @@
         for="contact-email"
       >E-mail</label>
       <input
+        v-model="$v.localContact.email.$model"
         type="email"
         name="email"
         id="contact-email"
         class="bg-gray-100 p-2 text-black rounded border-2 focus:bg-gray-200 focus:shadown"
-        v-model="localContact.email"
+        :class="{'border border-red-500': $v.localContact.email.$anyDirty && (!$v.localContact.email.required || !$v.localContact.email.maxLength)}"
       >
       <p class="text-gray-500 italic text-sm">* Obrigatório</p>
     </div>
@@ -106,6 +108,8 @@
 </template>
 
 <script>
+  import {required, maxLength} from 'vuelidate/lib/validators'
+
   export default {
     name: "ContactForm",
     props: {
@@ -119,9 +123,15 @@
     data () {
       return {
         countPhones: 1,
-        localContact: {phones: []},
+        localContact: {name: '', email: '', phones: []},
         showAlert: false,
         showModal: false
+      }
+    },
+    validations: {
+      localContact: {
+        name: {required, maxLength: 255},
+        email: {required, maxLength: 255}
       }
     },
     watch: {
@@ -130,6 +140,7 @@
       }
     },
     mounted () {
+      this.$v.$reset()
       this.countPhones = this.contact.phones.length
       this.localContact = JSON.parse(JSON.stringify(this.contact))
     },
@@ -144,7 +155,11 @@
         this.countPhones = this.localContact.phones.length
       },
       submitForm () {
+        this.$v.$touch()
+        if (this.$v.$invalid) return
+
         if (this.contact.hasOwnProperty('id')) return this.putForm()
+
         return this.postForm()
       },
       putForm () {
