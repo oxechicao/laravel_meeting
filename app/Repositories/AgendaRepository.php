@@ -23,6 +23,15 @@ class AgendaRepository
     }
 
     /**
+     * @param $id
+     * @return mixed
+     */
+    public function allNextDaysByUser($id)
+    {
+        return Agenda::where('user_id', $id)->where('date', '>=', Carbon::now('America/Fortaleza'))->orderBy('date', 'asc')->get();
+    }
+
+    /**
      * @param array $data
      * @return bool
      */

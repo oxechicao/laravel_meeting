@@ -26,7 +26,10 @@
               </span>
             </div>
           </div>
-          <div class="w-10 h-full mx-3 flex flex-col">
+          <div
+            v-if="showActions"
+            class="w-10 h-full mx-3 flex flex-col"
+          >
             <button
               class="btn-action"
               @click="showModal = true"
@@ -44,6 +47,7 @@
       </div>
     </div>
     <agenda-form-modal
+      v-if="showActions"
       @close="showModal = false"
       @getAgendas="$emit('getAgendas')"
       :actions="actions"
@@ -51,6 +55,7 @@
       :agenda-prop="meeting"
     />
     <agenda-remove-confirm
+      v-if="showActions"
       @close="showModalRemove = false"
       @getAgendas="$emit('getAgendas')"
       :showModal="showModalRemove"
@@ -64,9 +69,10 @@
   export default {
     name: "AgendaListDetailedCard",
     props: {
-      actions: {
-        required: true
+      showActions: {
+        default: true
       },
+      actions: {},
       meeting: {
         required: true
       }

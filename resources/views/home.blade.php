@@ -15,7 +15,7 @@
             <p class="text-4xl text-gray-700">Próximas reuniões</p>
         </div>
         <div class="mt-16 mx-16">
-            <card-meeting></card-meeting>
+            <card-meeting :actions="['{{route('agenda.all.next')}}']" />
         </div>
     </div>
     <div class="flex flex-col w-full h-full  min-h-screen md:w-2/6 bg-gray-900 items-center">

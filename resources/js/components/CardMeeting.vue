@@ -7,7 +7,16 @@
       v-else
       class="w-full text-gray-700"
     >
-      <content-meeting :meetings="meetings"></content-meeting>
+      <div
+        v-for="(meeting, i) in meetings"
+        :key="i"
+        class="flex w-full bg-white shadow-lg items-center py-6 mb-10"
+      >
+        <agenda-list-detailed-card
+          :show-actions="false"
+          :meeting="meeting"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -15,39 +24,30 @@
 <script>
   export default {
     name: "CardMeeting",
-    data() {
+    props: {
+      actions: {
+        required: true
+      }
+    },
+    data () {
       return {
-        meetings: [
-          {
-            title: 'REUNIÃO PARA DISCUTIR A INVASÃO DO VERÃO ORIUNDO DO CENTRO',
-            date: new Date(),
-            contacts: [
-              {
-                name: 'John Snow',
-                email: 'john.snow@sabedenada.com'
-              },
-              {
-                name: 'Adelaide Odacilva',
-                email: 'adecilva@gmail.com'
-              },
-              {
-                name: '',
-                email: 'carla.perez@eotchan.com'
-              }, {
-                name: 'John Snow',
-                email: 'john.snow@sabedenada.com'
-              },
-              {
-                name: 'Adelaide Odacilva',
-                email: 'adecilva@gmail.com'
-              },
-              {
-                name: '',
-                email: 'carla.perez@eotchan.com'
+        meetings: []
+      }
+    },
+    mounted () {
+      this.getAllNextAgendas()
+    },
+    methods: {
+      getAllNextAgendas () {
+        window.axios.get(this.actions[0])
+          .then(res => {
+            this.meetings = res.data.map(item => {
+              if (item.hasOwnProperty('date') && item.date) {
+                item.date = new Date(item.date)
               }
-            ]
-          }
-        ]
+              return item
+            })
+          })
       }
     }
   }

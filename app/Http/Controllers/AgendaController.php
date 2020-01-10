@@ -89,6 +89,15 @@ class AgendaController extends Controller
     }
 
     /**
+     * @param AgendaRepository $agendaRepository
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getAllNextDays(AgendaRepository $agendaRepository)
+    {
+        return response()->json($agendaRepository->allNextDaysByUser(\Auth::user()->id));
+    }
+
+    /**
      * Get a validator for an incoming registration request.
      *
      * @param array $data
