@@ -18,6 +18,7 @@ class AgendaController extends Controller
     {
         return view('agenda/index', [
             'actions' => collect([
+                'all' => route('agenda.all'),
                 'store' => route('agenda.store'),
                 'update' => route('agenda.update'),
                 'destroy' => route('agenda.destroy'),

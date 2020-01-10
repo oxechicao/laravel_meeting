@@ -18,11 +18,8 @@
         />
       </div>
     </div>
-    <div>
-      vizualização
-    </div>
-    <div>
-      cards reuniões
+    <div class="w-full mt-16 pr-16">
+      <agendas-list :meetings="meetings"/>
     </div>
   </div>
 </template>
@@ -39,10 +36,12 @@
 
     mounted () {
       this.getAllContacts()
+      this.getAllMeetings()
     },
 
     data () {
       return {
+        meetings: [],
         contacts: [],
         attibutesCalendar: [
           {
@@ -71,6 +70,17 @@
         window.axios.get(this.actions.getAllContacts)
           .then(response => {
             this.contacts = response.data
+          })
+      },
+      getAllMeetings () {
+        window.axios.get(this.actions.all)
+          .then(response => {
+            this.meetings = response.data.map(item => {
+              if (item.hasOwnProperty('date') && item.date) {
+                item.date = new Date(item.date)
+              }
+              return item
+            })
           })
       }
     }

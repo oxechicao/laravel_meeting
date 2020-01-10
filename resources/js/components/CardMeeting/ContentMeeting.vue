@@ -23,12 +23,12 @@
           </div>
           <div class="flex flex-wrap ">
             <div
-              v-for="(contact, ic) in meeting.contacts"
+              v-for="(participant, ic) in meeting.participants"
               :key="ic"
             >
               <p class="my-2">
                 <span class="font-bold mx-5">
-                  {{contact.name !== '' ? contact.name : contact.email }}
+                  {{participant.name !== '' ? participant.name : participant.email }}
                 </span>
               </p>
             </div>
