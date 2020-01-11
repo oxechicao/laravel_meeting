@@ -181,4 +181,34 @@ class LoginUserTest extends TestCase
 
         $this->assertGuest();
     }
+
+    /**
+     * @test
+     */
+    public function user_can_not_view_login_route_when_authenticated()
+    {
+        $this->actingAs(factory(User::class)->make())
+            ->get('/login')
+            ->assertRedirect('/home');
+    }
+
+    /**
+     * @test
+     */
+    public function user_can_not_view_root_route_when_authenticated()
+    {
+        $this->actingAs(factory(User::class)->make())
+            ->get('/')
+            ->assertRedirect('/home');
+    }
+
+    /**
+     * @test
+     */
+    public function user_can_not_view_register_route_when_authenticated()
+    {
+        $this->actingAs(factory(User::class)->make())
+            ->get('/register')
+            ->assertRedirect('/home');
+    }
 }

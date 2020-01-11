@@ -54,6 +54,7 @@ class ContactController extends Controller
      */
     public function destroy(Contact $contact)
     {
+        if ($contact->isClean()) return response()->json(['No contact are found'], 404);
         return response()->json($contact->delete());
     }
 
