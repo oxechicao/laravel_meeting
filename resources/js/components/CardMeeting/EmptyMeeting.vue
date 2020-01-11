@@ -1,7 +1,7 @@
 <template>
-  <div class="max-w-sm w-full lg:max-w-full lg:flex bg-white shadow-lg items-center">
+  <div class="md:max-w-sm w-full lg:max-w-full lg:flex bg-white shadow-lg items-center">
     <div
-      class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden bg-white"
+      class="lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden bg-white"
     >
       <span class="mdi mdi-emoticon-sad-outline text-6xl text-gray-500"></span>
     </div>

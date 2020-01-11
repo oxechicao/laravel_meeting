@@ -1,6 +1,6 @@
 <template>
   <div class="flex w-full">
-    <div v-if="meetings.length === 0">
+    <div class="w-full" v-if="meetings.length === 0">
       <empty-meeting></empty-meeting>
     </div>
     <div
