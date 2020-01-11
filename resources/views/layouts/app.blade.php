@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="bg-gray-200">
 <head>
   <meta charset="utf-8">
   <meta
@@ -66,7 +66,7 @@
   >
     @include('layouts.menuVertical')
   </div>
-  <div class="flex flex-col md:flex-row w-full max-w-full min-h-screen h-full md:pl-32 pt-24 md:pt-0 bg-gray-200">
+  <div class="flex flex-wrap flex-col md:flex-row w-full max-w-full min-h-screen h-full md:pl-32 pt-24 md:pt-0">
     @yield('content')
   </div>
 </div>

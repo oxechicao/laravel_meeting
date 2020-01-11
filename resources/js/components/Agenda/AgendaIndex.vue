@@ -1,15 +1,14 @@
 <template>
-  <div class="flex flex-col w-full">
-    <div class="flex w-full">
-      <div class="h-full">
+  <div class="flex flex-col w-full h-full">
+    <div class="flex flex-wrap xl:flex-no-wrap w-full pr-10 lg:pr-0 mb-16">
+      <div class="flex h-full w-full justify-center xl:w-auto mb-10 xl:mb-0 md:pr-0">
         <v-calendar
           v-model="dateCalendar"
-          is-expanded
           :attributes="attibutesCalendar"
           @dayclick="dayClicked"
         />
       </div>
-      <div class="h-64 ml-0 md:ml-10  w-full pr-16">
+      <div class="h-64 ml-0 xl:ml-10 w-full pr-16">
         <agenda-form
           @getAgendas="getAllMeetings"
           :actions="actions"
@@ -18,7 +17,7 @@
         />
       </div>
     </div>
-    <div class="w-full mt-10 pr-16">
+    <div class="w-full h-full mt-40 xl:mt-0 pr-16">
       <agendas-list
         :date-calendar="new Date(dateCalendar)"
         @getAgendas="getAllMeetings"

@@ -1,8 +1,10 @@
 <template>
-  <div class="flex justify-start w-full h-full mb-16 text-gray-900">
-    <div class="flex flex-col w-full md:w-8/12 mr-10">
+  <div class="flex flex-wrap xl:flex-no-wrap justify-start w-full h-full mb-16 text-gray-900">
+    <!--    XL - LEFT FORM-->
+    <div class="flex flex-wrap xl:flex-no-wrap flex-col w-full mb-5 lg:mb-0 xl:w-8/12 lg:mr-10">
+      <!--      TITLE         -->
       <div class="mb-5 w-full flex flex-wrap items-center">
-        <div class="w-full md:w-1/6">
+        <div class="w-full lg:w-1/6">
           <label
             class="w-full text-lg text-gray-800"
             :for="`title-${randomId}`"
@@ -10,7 +12,7 @@
             Título
           </label>
         </div>
-        <div class="w-full md:w-5/6">
+        <div class="w-full lg:w-5/6 xl:pl-3">
           <input
             :id="`title-${randomId}`"
             v-model.trim="$v.agenda.title.$model"
@@ -20,12 +22,13 @@
           />
         </div>
       </div>
+      <!--      DATE -->
       <div class="mb-5 w-full flex flex-wrap items-center">
-        <div class="w-full md:w-1/2 flex items-center">
-          <div class="w-full md:w-1/3">
+        <div class="w-full mb-5 lg:mb-0 lg:w-1/2 flex flex-wrap items-center">
+          <div class="w-full lg:w-1/3">
             <label class="text-lg text-gray-900">Data</label>
           </div>
-          <div class="w-full md:w-2/3">
+          <div class="w-full lg:w-2/3 xl:pl-3">
             <input
               class="w-full px-3 py-2 text-gray-900 bg-gray-300 focus:shadow-lg shadow rounded-lg hover:border hover:border-orange-500"
               type="text"
@@ -34,28 +37,31 @@
             >
           </div>
         </div>
-        <div class="w-full md:w-1/2 flex items-center">
-          <div class="mx-16">
+        <div class="w-full mb-5 lg:mb-0 lg:w-1/2 flex flex-wrap lg:flex-no-wrap items-center">
+          <div class="w-full lg:w-1/3 lg:mx-16 xl:mx-10">
             <label class="text-lg text-gray-900">Horário</label>
           </div>
-          <input
-            @keyup="verifyHours"
-            class="w-full px-3 py-2 text-gray-900 focus:bg-gray-100 focus:shadow-lg shadow rounded-lg hover:border hover:border-orange-500"
-            type="text"
-            v-mask="'##:##'"
-            v-model="$v.agenda.hour.$model"
-            :class="{'border border-red-500': $v.agenda.hour.$anyDirty && !$v.agenda.hour.required}"
-          >
+          <div class="w-full lg:2/3">
+            <input
+              @keyup="verifyHours"
+              class="w-full px-3 py-2 text-gray-900 focus:bg-gray-100 focus:shadow-lg shadow rounded-lg hover:border hover:border-orange-500"
+              type="text"
+              v-mask="'##:##'"
+              v-model="$v.agenda.hour.$model"
+              :class="{'border border-red-500': $v.agenda.hour.$anyDirty && !$v.agenda.hour.required}"
+            >
+          </div>
         </div>
       </div>
-      <div class="w-full h-full flex flex-wrap items-center">
-        <div class="w-full md:w-1/6">
+      <!--      DESCRIPTION-->
+      <div class="mb-5 w-full xl:h-full flex flex-wrap xl:flex-no-wrap items-center">
+        <div class="w-full lg:w-1/6">
           <label
             class="text-lg text-gray-900"
             :for="`description-${randomId}`"
           >Descrição</label>
         </div>
-        <div class="w-full h-full md:w-5/6">
+        <div class="w-full h-full lg:w-5/6 xl:pl-3">
           <textarea
             :id="`description-${randomId}`"
             v-model="agenda.description"
@@ -67,8 +73,10 @@
 
       </div>
     </div>
-    <div class="flex flex-col w-full md:w-4/12">
-      <div class="flex justify-between items-center">
+
+    <!--    XL - RIGHT FORM-->
+    <div class="flex flex-wrap xl:flex-no-wrap xl:flex-col w-full h-full xl:w-4/12">
+      <div class="flex w-full justify-between items-center">
         <p class="text-lg">Participantes</p>
         <button
           title="Adicionar participante"
@@ -76,7 +84,7 @@
           @click="addNewParticipant"
         />
       </div>
-      <div class="h-full max:h-full overflow-y-scroll pr-3 mb-3">
+      <div class="flex w-full h-auto xl:h-full max:h-full overflow-y-scroll pr-3 mb-3">
         <div
           v-if="agenda.participants.length === 0"
           class="mx-5 my-5"
@@ -85,20 +93,26 @@
         </div>
         <div
           v-else
-          v-for="(participant, index) in agenda.participants"
-          :key="index"
+          class="w-full"
         >
-          <agenda-card-participant-added
-            @close="showModal = false"
-            @remove="removeParticipant"
-            @findContacts="$emit('findContacts')"
-            :actions="actions"
-            :contacts="contacts"
-            :participant="participant"
-          />
+          <div
+            class="w-full"
+            v-for="(participant, index) in agenda.participants"
+            :key="index"
+          >
+
+            <agenda-card-participant-added
+              @close="showModal = false"
+              @remove="removeParticipant"
+              @findContacts="$emit('findContacts')"
+              :actions="actions"
+              :contacts="contacts"
+              :participant="participant"
+            />
+          </div>
         </div>
       </div>
-      <div class="self-end w-full">
+      <div class="w-full">
         <button
           @click="saveMeeting"
           class="px-3 py-2 w-full bg-orange-700 text-white text-lg rounded-lg hover:shadow-lg hover:bg-orange-600"
@@ -107,6 +121,7 @@
         </button>
       </div>
     </div>
+
     <agenda-add-new-participant-modal
       @close="showModal = false"
       @addParticipant="addParticipant"
