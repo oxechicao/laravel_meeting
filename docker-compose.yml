@@ -5,7 +5,7 @@ services:
     image: postgres:12.1
     container_name: laravel-meeting-postgres
     volumes:
-      - "./docker_config/postgres:/var/lib/postgresql/data"
+      - "./docker_config/postgres/data:/var/lib/postgresql/data"
     environment:
       - POSTGRES_USER=${DB_USERNAME}
       - POSTGRES_PASSWORD=${DB_PASSWORD}
