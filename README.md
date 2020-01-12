@@ -63,7 +63,7 @@ A sample of meeting scheduler application built with Laravel, Tailwind.css, Vuej
 
 ### Run tests
 
-Before it, make sure to run the migration to testing_pgsql database:
+Before do it, make sure to run the migration to testing_pgsql database:
 
 > php artisan migrate --database="testing_pgsql" 
 
