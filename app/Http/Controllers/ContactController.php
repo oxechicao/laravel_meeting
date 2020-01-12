@@ -52,9 +52,9 @@ class ContactController extends Controller
      * @return \Illuminate\Http\JsonResponse
      * @throws \Exception
      */
-    public function destroy(Contact $contact)
+    public function destroy(Request $request, Contact $contact)
     {
-        if ($contact->isClean()) return response()->json(['No contact are found'], 404);
+        if (!data_get($contact, 'id', false)) return response()->json(['No contact are found'], 404);
         return response()->json($contact->delete());
     }
 

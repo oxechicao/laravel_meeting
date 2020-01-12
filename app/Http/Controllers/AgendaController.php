@@ -76,6 +76,7 @@ class AgendaController extends Controller
      */
     public function destroy(Agenda $agenda)
     {
+        if (!data_get($agenda, 'id', false)) return response()->json(['Agenda not found'], 404);
         return response()->json($agenda->delete());
     }
 
@@ -106,11 +107,11 @@ class AgendaController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'title' => ['required', 'string', 'max:255'],
-            'description' => ['string'],
-            'date' => ['required', 'date'],
-            'hour' => ['required', 'string'],
-            'participants' => ['array']
+            'title' => 'required|string|max:255',
+            'description' => 'string',
+            'date' => 'required|date',
+            'hour' => 'required|string',
+            'participants' => 'array'
         ]);
     }
 }

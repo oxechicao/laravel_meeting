@@ -58,6 +58,7 @@ class DestroyContactTest extends TestCase
      */
     public function user_can_destroy_contact_with_correct_delete()
     {
+        $this->withoutExceptionHandling();
         $user = factory(User::class)->create();
         $contact = factory(Contact::class)->create([
             'user_id' => $user->id

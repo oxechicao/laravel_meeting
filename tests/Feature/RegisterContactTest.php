@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Contact;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -46,11 +47,10 @@ class RegisterContactTest extends TestCase
     {
         $user = factory(User::class)->create();
         $this->actingAs($user)
-            ->post('/contacts/store', [
-                'phones' => ['(23) 99999-9999'],
-                'email' => 'test@test.tt',
-                'name' => 'Test Contact'
-            ])
+            ->post(
+                '/contacts/store',
+                factory(Contact::class)->make(['user_id' => $user->id])->toArray()
+            )
             ->assertOk();
     }
 
@@ -60,11 +60,10 @@ class RegisterContactTest extends TestCase
     public function user_can_not_store_contact_with_no_name()
     {
         $user = factory(User::class)->create();
+        $contact = factory(Contact::class)->make(['user_id' => $user->id])->toArray();
+        unset($contact['name']);
         $this->actingAs($user)
-            ->post('/contacts/store', [
-                'user_id' => $user->id,
-                'email' => 'test@test.tt',
-            ])
+            ->post('/contacts/store', $contact)
             ->assertSessionMissing('email')
             ->assertSessionHasErrors('name');
     }
@@ -75,10 +74,10 @@ class RegisterContactTest extends TestCase
     public function user_can_not_store_contact_with_no_email()
     {
         $user = factory(User::class)->create();
+        $contact = factory(Contact::class)->make(['user_id' => $user->id])->toArray();
+        unset($contact['email']);
         $this->actingAs($user)
-            ->post('/contacts/store', [
-                'name' => 'Test unit'
-            ])
+            ->post('/contacts/store', $contact)
             ->assertSessionMissing('name')
             ->assertSessionHasErrors('email');
     }
