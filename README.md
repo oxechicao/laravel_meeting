@@ -50,7 +50,11 @@ A sample of meeting scheduler application built with Laravel, Tailwind.css, Vuej
       `php artisan key:generate && php artisan serve`  
       `Laravel development server started: http://127.0.0.1:8000`
    2. With docker-composer:  
-      `docker-composer up`
+      `docker-compose up -d`
+6. If the error shows:  
+`could not be opened: failed to open stream: Permission denied`  
+Give the permission 777 to the storage ./storage/logs/ 
+
 
 ### Run tests
 
