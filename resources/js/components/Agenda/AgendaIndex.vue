@@ -10,6 +10,7 @@
       </div>
       <div class="h-64 ml-0 xl:ml-10 w-full pr-16">
         <agenda-form
+          @findContacts="getAllContacts"
           @getAgendas="getAllMeetings"
           :actions="actions"
           :dateCalendar="dateCalendar"
