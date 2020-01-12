@@ -45,9 +45,11 @@ A sample of meeting scheduler application built with Laravel, Tailwind.css, Vuej
 4. Run the migrations:
    1. `php artisan migrate`
    2. `php artisan migrate --database="testing_pgsql"`
-5. Start server:
+5. Generate the key:
+   1. `php artisan key:generate`
+6. Start server:
    1. Without docker:  
-      `php artisan key:generate && php artisan serve`  
+      `php artisan serve`  
       `Laravel development server started: http://127.0.0.1:8000`
    2. With docker-composer:  
       `docker-compose up -d`
