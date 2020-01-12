@@ -51,15 +51,20 @@ A sample of meeting scheduler application built with Laravel, Tailwind.css, Vuej
       `Laravel development server started: http://127.0.0.1:8000`
    2. With docker-composer:  
       `docker-compose up -d`
-6. If the error shows:  
-`could not be opened: failed to open stream: Permission denied`  
-Give the permission 777 to the storage ./storage/logs/ 
+        6. If the error shows:  
+        `could not be opened: failed to open stream: Permission denied`  
+        Give the permission 777 to the storage ./storage/logs/ and storage/framework/views/  
+        It is not the best answer, but it works :)
+        7. If database shows some error of connection:  
+        Change the DB_HOST on .env file to the IP of postgresql on docker: 172.28.1.2
 
 
 ### Run tests
 
-Before it, make sure to run the migration to testing_pgsql database:  
+Before it, make sure to run the migration to testing_pgsql database:
+
 > php artisan migrate --database="testing_pgsql" 
+
 
 ```shell script
 clear; phpunit

@@ -1,10 +1,6 @@
 version: "3.7"
 services:
 
-    redis:
-      image: redis:alpine
-      container_name: ${APP_NAME}-redis
-
     postgres:
       image: postgres:12.1
       container_name: ${APP_NAME}-postgres
@@ -13,7 +9,7 @@ services:
       environment:
         - POSTGRES_USER=${DB_USERNAME}
         - POSTGRES_PASSWORD=${DB_PASSWORD}
-        - POSTGRES_DB=${DB_DATABASEx}
+        - POSTGRES_DB=${DB_DATABASE}
       ports:
        - "5432:5432"
       networks:
@@ -38,7 +34,7 @@ services:
       working_dir: /application
       volumes:
         - ./:/application
-        - ./sourcefiles/php-fpm/php-ini-overrides.ini:/etc/php/7.3/fpm/conf.d/99-overrides.ini
+        - ./sourcefiles/php-fpm/php-ini-overrides.ini:/etc/php/7.4/fpm/conf.d/99-overrides.ini
       networks:
           testing_net:
               ipv4_address: 172.28.1.4
