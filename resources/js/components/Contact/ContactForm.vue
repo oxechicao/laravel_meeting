@@ -69,7 +69,7 @@
             id="contact-phone"
             class="bg-gray-100 p-2 text-black rounded border-2 focus:bg-gray-200 focus:shadown w-full"
             v-model="localContact.phones[count -1]"
-            v-mask="'(##) # ####-#####'"
+            v-mask="'(##) # #####-####'"
           >
           <button
             @click="removePhone(count -1)"
@@ -136,13 +136,14 @@
     },
     watch: {
       contact () {
-        this.localContact = JSON.parse(JSON.stringify(this.contact))
+        this.localContact = Object.assign({}, this.contact)
+        this.countPhones = this.contact.phones.length
       }
     },
     mounted () {
       this.$v.$reset()
       this.countPhones = this.contact.phones.length
-      this.localContact = JSON.parse(JSON.stringify(this.contact))
+      this.localContact = Object.assign({}, this.contact)
     },
     computed: {
       action () {

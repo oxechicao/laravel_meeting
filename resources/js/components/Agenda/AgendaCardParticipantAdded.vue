@@ -73,7 +73,7 @@
        },
 
        editContact () {
-         this.contactModal = Object.assign(this.contact, {phones: []})
+         this.contactModal = Object.assign({phones: ['']}, this.contact)
          this.showModal = true
        },
 
