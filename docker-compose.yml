@@ -25,7 +25,7 @@ services:
       - ./:/var/www:shared,consistent
       # - ./docker_config/nginx/site:/etc/nginx/conf.d
       - ./docker_config/nginx/site:/etc/nginx/sites-available
-      
+
     ports:
       - "80:80"
     depends_on:
