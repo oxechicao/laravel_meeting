@@ -1,7 +1,8 @@
 FROM phpdockerio/php74-fpm
-WORKDIR "/application"
+WORKDIR /var/www
 
 # Fix debconf warnings upon build
+ENV DEBIAN_FRONTEND noninteractive
 ARG DEBIAN_FRONTEND=noninteractive
 
 # Install selected extensions and other stuff
@@ -16,5 +17,9 @@ RUN apt-get update \
 
 RUN apt-get update && apt-get install -y libmcrypt-dev
 
-ADD . /application
-RUN chown -R www-data:www-data /application
+ADD . /var/www
+RUN chown -R www-data:www-data /var/www
+
+CMD ["php-fpm"]
+
+EXPOSE 9000
