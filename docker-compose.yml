@@ -1,0 +1,47 @@
+version: "3.7"
+services:
+
+  postgres:
+    image: postgres:12.1
+    container_name: laravel-meeting-postgres
+    volumes:
+      - "./docker_config/postgres:/var/lib/postgresql/data"
+    environment:
+      - POSTGRES_USER=${DB_USERNAME}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_DATABASE}
+    ports:
+      - "5432:5432"
+    networks:
+      testing_net:
+        ipv4_address: 172.28.1.2
+
+  webserver:
+    build: docker_config/nginx
+    container_name: laravel-meeting-webserver
+    working_dir: /application
+    volumes:
+      - ./:/application
+      - ./docker_config/nginx:/etc/nginx/conf.d
+    ports:
+      - "80:80"
+    networks:
+      testing_net:
+        ipv4_address: 172.28.1.3
+
+  php-fpm:
+    build: docker_config/fpm
+    container_name: laravel-meeting-php-fpm
+    working_dir: /
+    volumes:
+      - ./:/application
+      - ./docker_config/fpm/php-ini-overrides.ini:/etc/php/7.4/fpm/conf.d/99-overrides.ini
+    networks:
+      testing_net:
+        ipv4_address: 172.28.1.4
+networks:
+  testing_net:
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.28.0.0/16
