@@ -31,4 +31,9 @@ class Agenda extends Model
         'hour' => 'string',
         'participants' => 'array'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 }

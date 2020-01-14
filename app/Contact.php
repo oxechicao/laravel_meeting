@@ -22,4 +22,9 @@ class Contact extends Model
         'email' => 'string',
         'name' => 'string'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 }
